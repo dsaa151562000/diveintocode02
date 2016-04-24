@@ -12,9 +12,9 @@ Rails.application.routes.draw do
 
   resources :blogs
   
-  get 'contact' , to: 'contact#new'
-  post 'contact/confirm' , to: 'contact#confirm'
-  post 'contact/thanks' , to: 'contact#thanks'
+  
+  
+
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
