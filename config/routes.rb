@@ -4,9 +4,9 @@ Rails.application.routes.draw do
   
   get 'contact/new'
 
-  get 'contact/confirm'
+  post 'contact/confirm'
 
-  get 'contact/thanks'
+  post 'contact/thanks'
 
 
 
