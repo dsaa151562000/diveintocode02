@@ -1,6 +1,7 @@
 class BlogsController < ApplicationController
   before_action :set_blog, only: [:show, :edit, :update, :destroy]
 
+  before_action :authenticate_user! 
   # GET /blogs
   # GET /blogs.json
   def index
@@ -27,6 +28,7 @@ class BlogsController < ApplicationController
     @blog = Blog.new(blog_params)
 
     respond_to do |format|
+      
       if @blog.save
         format.html { redirect_to @blog, notice: 'Blog was successfully created.' }
         format.json { render :show, status: :created, location: @blog }
@@ -34,6 +36,7 @@ class BlogsController < ApplicationController
         format.html { render :new }
         format.json { render json: @blog.errors, status: :unprocessable_entity }
       end
+      
     end
   end
 

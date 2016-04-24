@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
-
+  devise_for :users
+  root to: "top#index"
+  
   get 'contact/new'
 
   get 'contact/confirm'
 
   get 'contact/thanks'
 
-  root to: "top#index" 
+
 
   resources :blogs
   
