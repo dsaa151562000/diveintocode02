@@ -1,16 +1,59 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Achieve</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+<html lang="jp">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : "Achieve" %></title>
+
+     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
-</head>
-<body>
+  </head>
+  <body>
 
-<p class="notice"><%= notice %></p> 
-<p class="alert"><%= alert %></p>
-<%= yield %>
+   <nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+     
+      <div class="navbar-brand"> <%= link_to "Achieve", root_path %></div>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        
+<% if user_signed_in? %> 
+<li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li> 
+<li><%= link_to "編集", edit_user_registration_path %></li> 
+<% else %>
+<li><%= link_to "ログイン", new_user_session_path %></li> 
+<% end %>
+       
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>
+<br>
+<br>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-9">
+          <%= bootstrap_flash %>
+          <%= yield %>
+        </div>
 
-</body>
+      </div><!--/row-->
+
+      <footer>
+        <p>&copy; Company 2016</p>
+      </footer>
+
+    </div> <!-- /container -->
+
+  </body>
 </html>
