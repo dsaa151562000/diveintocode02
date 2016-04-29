@@ -7,6 +7,7 @@
     <title><%= content_for?(:title) ? yield(:title) : "Achieve" %></title>
 
      <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+     <%= stylesheet_link_tag "bootstrap", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   </head>
@@ -43,7 +44,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-9">
-          <%= bootstrap_flash %>
+
           <%= yield %>
         </div>
 
