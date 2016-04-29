@@ -11,18 +11,18 @@
     </tr>
   </thead>
 
-  <tbody>
+
     <% @blogs.each do |blog| %>
-      <tr>
-        <td><%= blog.title %></td>
-        <td><%= blog.content %></td>
-        <td><%= link_to 'Show', blog %></td>
-        <td><%= link_to 'Edit', edit_blog_path(blog) %></td>
-        <td><%= link_to 'Destroy', blog, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= blog.title %></h3>
+      </div>
+      <div class="panel-body">
+        <%= blog.content %><br/>
+        <em><%= blog.created_at %></em>
+      </div>
+    </div>
     <% end %>
-  </tbody>
-</table>
 
 
 
