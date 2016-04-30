@@ -38,7 +38,7 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><%=link_to "ブログ",blogs_path %></li>
-            <li><a href="#">Another action</a></li>
+            <li><%=link_to "User一覧",users_path %></li>
             <li><a href="#">Something else here</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="#">Separated link</a></li>
@@ -53,17 +53,10 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+<div class="alert"><%= notice %></div>
+<div class="alert"><%= alert %></div>
           <%= yield %>
 
-
-<div class="box5">
-  <div class="copyright">
-  <p>Copyright &copy; 2015 Dive into Code All Rights Reserved.</p>
-  </div>
-</div>
-
-<p class="notice"></p>
-<p class="alert"></p>
 
 
   </body>

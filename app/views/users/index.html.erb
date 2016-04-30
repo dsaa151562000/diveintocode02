@@ -1,15 +1,14 @@
+
+
+
+    <% @users.each do |user| %>
+
 <div class="panel panel-default">
-  <div class="panel-heading">Panel heading without title</div>
-  <div class="panel-body">
-    Panel content
+  <div class="panel-heading">  <%= user.name %></div>
+    <div class="panel-body">
+    <%= user.profile %>
   </div>
 </div>
 
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">Panel title</h3>
-  </div>
-  <div class="panel-body">
-    Panel content
-  </div>
-</div>
+
+    <% end %>
