@@ -24,7 +24,7 @@
         <span class="icon-bar"></span>
       </button>
      <!-- <a class="navbar-brand" href="#">Achieve</a>-->
-      <%=link_to "Achieve",root_path,class: "navbar-brand"  %>
+      <%=link_to "Achieve",root_path, class: "navbar-brand"  %>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -53,8 +53,13 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+
+<% if notice %>
 <div class="alert"><%= notice %></div>
+<% end %>
+<% if alert %>
 <div class="alert"><%= alert %></div>
+<% end %>
           <%= yield %>
 
 

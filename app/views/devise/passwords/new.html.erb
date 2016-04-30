@@ -1,16 +1,42 @@
-<h2>パスワードをお忘れの方</h2>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= devise_error_messages! %>
+<div class="container">
+    <div class="row">
+    	<div class="col-md-4 col-md-offset-4">
+    		<div class="panel panel-default">
+			  	<div class="panel-heading">
+			    	<h3 class="panel-title">パスワードをお忘れの方録</h3>
+			 	</div>
+			  	<div class="panel-body">
+         <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+         <%= devise_error_messages! %>
+			  	    
+			    	<form action="/users/sign_in" accept-charset="UTF-8" method="post" >
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
+                 <fieldset>
+			    	  	<div class="form-group">
 
-  <div class="actions">
-    <%= f.submit "登録されたメールアドレスにお送りします。" %>
-  </div>
-<% end %>
+                 <%= f.label :メールアドレス %><br />
+              <%= f.email_field :email, autofocus: true %>
+			    		   
+			    		</div>
+			    		
+			    		<div class="form-group">
+			    		  
+                      <%= f.label :パスワード %>
+                      <% if @minimum_password_length %>
+                      <em>(<%= @minimum_password_length %> 文字以上)</em>
+                      <% end %><br />
+                      <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
 
-<%= render "devise/shared/links" %>
+			    		</div>
+			    	    <%= f.submit "登録されたメールアドレスにお送りします。" %>
+			    	</fieldset>
+
+			      	<% end %>
+                   <hr>
+                   <%= render "devise/shared/links" %>
+			    </div>
+			</div>
+		</div>
+	</div>
+</div>

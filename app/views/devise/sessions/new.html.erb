@@ -1,60 +1,39 @@
-<h2>ログイン</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :メールアドレス %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :パスワード %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :保存する %>
-    </div>
-  <% end -%>
-
-  <div class="actions">
-    <%= f.submit "ログイン" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
-
 
 <div class="container">
     <div class="row">
     	<div class="col-md-4 col-md-offset-4">
     		<div class="panel panel-default">
 			  	<div class="panel-heading">
-			    	<h3 class="panel-title">Login via site</h3>
+			    	<h3 class="panel-title">ログイン</h3>
 			 	</div>
 			  	<div class="panel-body">
-			    	<form accept-charset="UTF-8" role="form">
+			  	    
+			  	    
+			    	<form action="/users/sign_in" accept-charset="UTF-8" method="post" >
                     <fieldset>
 			    	  	<div class="form-group">
-			    		    <input class="form-control" placeholder="yourmail@example.com" name="email" type="text">
+			    	  	    <label for="user_メールアドレス">メールアドレス</label><br />
+			    		    <input class="form-control" placeholder="yourmail@example.com" autofocus="autofocus" type="email" value="" name="user[email]" id="user_email">
 			    		</div>
 			    		<div class="form-group">
-			    			<input class="form-control" placeholder="Password" name="password" type="password" value="">
+			    		    <label for="user_パスワード">パスワード</label><br />
+			    			<input autocomplete="off" type="password" name="user[password]" id="user_password" />
 			    		</div>
 			    		<div class="checkbox">
 			    	    	<label>
-			    	    		<input name="remember" type="checkbox" value="Remember Me"> Remember Me
-			    	    	</label>
+			    	    	          <input name="user[remember_me]" type="hidden" value="0" /><input type="checkbox" value="1" name="user[remember_me]" id="user_remember_me" />
+      <label for="user_保存する">保存する</label>
+
 			    	    </div>
-			    		<input class="btn btn-lg btn-success btn-block" type="submit" value="Login">
+			    		<input class="btn btn-lg btn-success btn-block" type="submit" name="commit" value="ログイン">
 			    	</fieldset>
 			      	</form>
-                      <hr/>
-                    <center><h4>OR</h4></center>
-                    <input class="btn btn-lg btn-facebook btn-block" type="submit" value="Login via facebook">
+                   <hr>
+                   <%= render "devise/shared/links" %>
 			    </div>
 			</div>
 		</div>
 	</div>
 </div>
+
+
