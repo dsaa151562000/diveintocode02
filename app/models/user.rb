@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
                         email: auth.info.email, 
                         password: Devise.friendly_token[0,20]
                         ) 
+     user.skip_confirmation!
+     user.save!
     end 
     user
   end
@@ -28,7 +30,9 @@ class User < ActiveRecord::Base
                         uid: auth.uid, 
                         email: User.create_unique_email, 
                         password: Devise.friendly_token[0,20]
-                        ) 
+                        )
+     user.skip_confirmation!
+     user.save!
    end 
   user
 
