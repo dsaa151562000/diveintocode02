@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
   
          
   def self.create_unique_string 
-  　　SecureRandom.uuid 
+    SecureRandom.uuid 
   end
   
   def self.create_unique_email 
@@ -46,7 +46,7 @@ class User < ActiveRecord::Base
   end
 
          
-  has_many :blogs
+  has_many :blogs, dependent: :destroy
   
    VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
     validates :email, presence: { message: "メールアドレスを入力してください" }, length: { maximum: 255 ,message: "255文字以内でご入力ください"},

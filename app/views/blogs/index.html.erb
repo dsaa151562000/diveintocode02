@@ -1,19 +1,42 @@
-<p id="notice"><%= notice %></p>
+
+
+<% if flash[:alert] %>
+  <div class="alert alert-danger">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+
 
     <% @blogs.each do |blog| %>
+   
+    <% if blog.user.name != nil %>
+    
     <div class="panel panel-primary">
       <div class="panel-heading">
         <h3 class="panel-title"><%= blog.title %></h3>
       </div>
       <div class="panel-body">
         <%= blog.content %><br/>
-        <em><%= blog.created_at %></em>
-         <em>投稿者:<%= blog.user.name %></em>
+      　 <em> <%= l blog.created_at, format: :default %></em><br>
+       　<em>投稿者:<%= blog.user.name %></em><br>
+         <em>blog ID:<%= blog.id %></em><br>
+          <%= image_tag(profile_img @user) %><br>
+
+         
+         
+         <% if blog.user.id == @user.id %>
+          <%= link_to "削除",blog_path(blog.id),data: {confirm: "本当に削除しますか？"},:method => :delete %><br>
+          <%= link_to 'Edit', edit_blog_path(blog.id) %> 
+        <% end %>
+ 
       </div>
     </div>
+    
+    <% end %>
+    
     <% end %>
 
 <br>
-
-<%= link_to 'New Blog', new_blog_path %>
-<%= link_to 'Back', blogs_path %>
+<% current_user.id %> 
+<%= link_to 'New Blog', new_blog_path %>|
+<%= link_to 'Back', blogs_path %>|

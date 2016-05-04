@@ -7,6 +7,7 @@ class BlogsController < ApplicationController
   # GET /blogs.json
   def index
     @blogs = Blog.all
+    @user = current_user
   end
 
   # GET /blogs/1
@@ -21,6 +22,7 @@ class BlogsController < ApplicationController
 
   # GET /blogs/1/edit
   def edit
+    @user = current_user
   end
 
   # POST /blogs
@@ -59,11 +61,21 @@ class BlogsController < ApplicationController
   # DELETE /blogs/1
   # DELETE /blogs/1.json
   def destroy
-    @blog.destroy
-    respond_to do |format|
-      format.html { redirect_to blogs_url, notice: 'Blog was successfully destroyed.' }
-      format.json { head :no_content }
+    
+    if(current_user.id == @blog.user_id)
+   
+     @blog.destroy
+     respond_to do |format|
+       format.html { redirect_to blogs_url, notice: '投稿を削除しました。' }
+       format.json { head :no_content }
+     end
+    else
+      #redirect_to action: 'index'
+      redirect_to :action => "index"
+      flash[:notice] = 'IDの書き換えはダメです！！'
+      #redirect_to blog_path, alert: 'alertメッセージ'
     end
+   
   end
 
   private
