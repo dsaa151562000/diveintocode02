@@ -16,12 +16,12 @@
 			    	  
                <fieldset>
                	
-         <div class="form-group">
-         	<% if @user.image? %>
-　　<%= image_tag @user.image.thumb.url %>
-　<% else %>
-　なしなしなし
-　<% end %>
+        　　　 <div class="form-group">
+         	　　<% if @user.image? %>
+　　　　　　　　　<%= image_tag @user.image.thumb.url %>
+　　　　　　　　<% else %>
+　　　　　　　　　画像なし
+　　　　　　　　<% end %>
 
 			    		       <%= f.label :プロフィール画像 %><br />
 			    		       　<%= f.file_field :image %> 
