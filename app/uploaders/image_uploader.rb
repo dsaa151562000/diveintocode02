@@ -1,7 +1,8 @@
 # encoding: utf-8
 
 class ImageUploader < CarrierWave::Uploader::Base
-  
+  require 'securerandom'
+
     # リサイズしたり画像形式を変更するのに必要
   include CarrierWave::RMagick
 
@@ -29,9 +30,14 @@ class ImageUploader < CarrierWave::Uploader::Base
  # ファイル名は日本語が入ってくると嫌なので、下記のようにしてみてもいい。
  # 日付(20131001.jpgみたいなファイル名)で保存する
   def filename
-    time = Time.now
-    name = time.strftime('%Y%m%d%H%M%S') + '.jpg'
+    #time = Time.now
+    #name = time.strftime('%Y%m%d%H%M%S') + '.jpg'
+    #name.downcase
+
+    
+    name ='profile'+ '.jpg'
     name.downcase
+
   end
 
   # Include RMagick or MiniMagick support:
