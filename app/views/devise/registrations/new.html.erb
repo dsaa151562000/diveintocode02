@@ -17,6 +17,14 @@
                     <fieldset>
                     	<div class="form-group">
 
+			    		       <%= f.label :プロフィール画像 %><br />
+			    		       　<%= f.file_field :image %> 
+
+			    		</div>
+                    	
+                    	
+                    	<div class="form-group">
+
 			    		       <%= f.label :お名前 %><br />
 			    		   　    <%= f.text_field :name, autofocus: true, class: "form-control" %>
 			    		   

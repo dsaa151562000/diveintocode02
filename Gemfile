@@ -40,6 +40,10 @@ gem 'omniauth-facebook'
 gem 'bootstrap-social-rails'
 gem 'font-awesome-rails'
 
+gem 'carrierwave'
+gem 'rmagick'
+
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

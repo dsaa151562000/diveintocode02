@@ -20,9 +20,9 @@
       　 <em> <%= l blog.created_at, format: :default %></em><br>
        　<em>投稿者:<%= blog.user.name %></em><br>
          <em>blog ID:<%= blog.id %></em><br>
-          <%= image_tag(profile_img @user) %><br>
-
          
+         <img alt="Flower" height="40" src=<%=profile_img blog.user %> width="40"  />
+       
          
          <% if blog.user.id == @user.id %>
           <%= link_to "削除",blog_path(blog.id),data: {confirm: "本当に削除しますか？"},:method => :delete %><br>
