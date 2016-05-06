@@ -25,7 +25,7 @@
        
          
          <% if blog.user.id == @user.id %>
-         <br>
+         <br><br>
           <%= link_to "削除",blog_path(blog.id),data: {confirm: "本当に削除しますか？"},:method => :delete %><br>
           <%= link_to 'Edit', edit_blog_path(blog.id) %> 
         <% end %>
