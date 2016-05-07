@@ -21,8 +21,9 @@
        　<em>投稿者:<%= blog.user.name %></em><br>
          <em>blog ID:<%= blog.id %></em><br>
          
+
          <img alt="Flower" height="40" src=<%=profile_img blog.user %> width="40"  />
-       
+     
          
          <% if blog.user.id == @user.id %>
          <br><br>

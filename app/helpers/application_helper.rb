@@ -7,7 +7,7 @@ module ApplicationHelper
          img_url = "http://furyu.nazo.cc/twicon/#{user.name}"
       else
          if user.image.present?
-            img_url = current_user.image.thumb.url
+            img_url = user.image.thumb.url
          else
              gravatar_id = Digest::MD5::hexdigest(user.email.downcase)
             img_url = "https://secure.gravatar.com/avatar/#{gravatar_id}"
