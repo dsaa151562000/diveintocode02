@@ -7,11 +7,14 @@ class User < ActiveRecord::Base
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil) 
     user = User.where(provider: auth.provider, uid: auth.uid).first
    
+   
+   
     unless user 
      user = User.create(name: auth.extra.raw_info.name, 
                         provider: auth.provider, 
                         uid: auth.uid, 
-                        email: auth.info.email, 
+                        #email: auth.info.email, 
+                         email: User.get_email(auth),
                         password: Devise.friendly_token[0,20]
                         ) 
      user.skip_confirmation!
@@ -57,4 +60,11 @@ class User < ActiveRecord::Base
    VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
     validates :email, presence: { message: "メールアドレスを入力してください" }, length: { maximum: 255 ,message: "255文字以内でご入力ください"},
                format: { with: VALID_EMAIL_REGEX,message: "メールアドレス形式でご入力ください　(例)user@example.co.jp" }
+  private
+    def self.get_email(auth)
+      email = auth.info.email
+      email = "#{auth.provider}-#{auth.uid}@example.com" if email.blank?
+      email
+    end
+
 end
