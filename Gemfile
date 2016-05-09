@@ -46,6 +46,8 @@ gem 'rmagick'
 #gem 'faker', '1.4.2'
 gem 'faker-japanese'
 
+gem 'rambulance'
+
 
 
 # Use ActiveModel has_secure_password

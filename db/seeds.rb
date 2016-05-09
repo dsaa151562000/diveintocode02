@@ -23,19 +23,20 @@
 # )
 # end
 
-# 100.times do |n|
-#   name  = Faker::Japanese::Name.name
-#   email = "example-#{n+1}@example.com"
-#   password = "password"
-#   provider = "provider#{n+1}"
-#   User.create!(name:  name,
-#               email: email,
-#               password:  password,
-#               provider: provider
-#               )
-# end
+1000.times do |n|
+  n += 1
+  name  = Faker::Japanese::Name.name
+  email = "example-#{n+1}@example.com"
+  password = "password"
+  provider = "provider#{n+1}"
+  User.create!(name:  name,
+              email: email,
+              password:  password,
+              provider: provider
+              )
+end
 
-17.times do |n|
+1000.times do |n|
 n += 1
 title = "ダミータイトル#{n+1}"
 content = "ダミー内容-#{n+1}"
