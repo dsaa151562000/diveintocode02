@@ -43,6 +43,9 @@ gem 'font-awesome-rails'
 gem 'carrierwave'
 gem 'rmagick'
 
+#gem 'faker', '1.4.2'
+gem 'faker-japanese'
+
 
 
 # Use ActiveModel has_secure_password

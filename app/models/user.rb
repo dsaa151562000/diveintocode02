@@ -7,14 +7,12 @@ class User < ActiveRecord::Base
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil) 
     user = User.where(provider: auth.provider, uid: auth.uid).first
    
-   
-   
     unless user 
      user = User.create(name: auth.extra.raw_info.name, 
                         provider: auth.provider, 
                         uid: auth.uid, 
                         #email: auth.info.email, 
-                         email: User.get_email(auth),
+                        email: User.get_email(auth),
                         password: Devise.friendly_token[0,20]
                         ) 
      user.skip_confirmation!
@@ -43,7 +41,6 @@ class User < ActiveRecord::Base
   end
   
   
-         
   def self.create_unique_string 
     SecureRandom.uuid 
   end
