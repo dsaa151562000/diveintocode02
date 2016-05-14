@@ -9,7 +9,7 @@ class ContactController < ApplicationController
        @contact = Contact.new(contact_params)
         
     if @contact.valid?
-       @contact.message.gsub(/\r\n|\r|\n/, "<br />")
+       @msee=@contact.message.gsub(/\r\n|\r|\n/, "<br />")
     else
       render action: 'new'
     end
