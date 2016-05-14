@@ -68,6 +68,7 @@ GEM
       railties (>= 4.1.0, < 5.1)
       responders
       warden (~> 1.2.3)
+    dotenv (2.1.1)
     erubis (2.7.0)
     execjs (2.6.0)
     faker-japanese (0.0.1)
@@ -213,6 +214,7 @@ DEPENDENCIES
   carrierwave
   coffee-rails (~> 4.1.0)
   devise
+  dotenv
   faker-japanese
   font-awesome-rails
   jbuilder (~> 2.0)

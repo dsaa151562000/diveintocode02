@@ -48,6 +48,8 @@ gem 'faker-japanese'
 
 gem 'rambulance'
 
+gem 'dotenv'
+
 
 
 # Use ActiveModel has_secure_password
