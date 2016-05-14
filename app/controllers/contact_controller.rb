@@ -9,8 +9,7 @@ class ContactController < ApplicationController
        @contact = Contact.new(contact_params)
         
     if @contact.valid?
-      str = html_escape(@contact.message)
-      @msee=str.gsub(/\r\n|\r|\n/, "<br />") 
+      @msee=@contact.message.gsub(/\r\n|\r|\n/, "<br />").html_safe
     else
       render action: 'new'
     end
