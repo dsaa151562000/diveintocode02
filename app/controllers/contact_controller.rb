@@ -1,19 +1,30 @@
 class ContactController < ApplicationController
+  
+
   def new
-    
     @contact = Contact.new
   end
 
   def confirm
-        @contact = Contact.new(contact_params)
+       @contact = Contact.new(contact_params)
+        
     if @contact.valid?
+
+      
     else
       render action: 'new'
     end
   end
 
+  #擬似的なUser構造体を作る
+	User2 = Struct.new(:name, :email)
+
   def thanks
     @contact = Contact.create(contact_params)
+    #擬似的なUser構造体を作成する
+    user = User2.new("name", "suzuki02yo@gmail.com")
+  	# deliverメソッドを使って、メールを送信する
+    ContactMailer.contact_email(user, @contact).deliver
   end
   
   private

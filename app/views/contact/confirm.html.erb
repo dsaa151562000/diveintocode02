@@ -23,7 +23,8 @@
       <th>お問い合わせ内容</th>
       <td>
         <%= f.hidden_field :message %>
-        <%= @contact.message %>
+        <div><%= simple_format(@contact.message) %></div>
+        
       </td>
     </tr>
   </table>
