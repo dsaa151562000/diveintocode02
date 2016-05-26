@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
   # GET /comments/1
   # GET /comments/1.json
   def show
-    @comment = @blog.comments.build
+
   end
 
   # GET /comments/new

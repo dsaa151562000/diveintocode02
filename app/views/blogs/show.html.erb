@@ -17,6 +17,14 @@
   </div>
 </div>
 
+<div class="panel panel-default">
+<%= render partial:'comments/index',locals: { comments: @comments} %>
+</div>
+
+<div class="panel panel-default">
+<%= render partial:'comments/form',locals: { comment: @comment} %>
+</div>
+
 <%= link_to 'Edit', edit_blog_path(@blog) %> |
 <%= link_to 'Back', blogs_path %>
 <br/>
