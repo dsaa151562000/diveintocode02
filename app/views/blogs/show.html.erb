@@ -18,7 +18,9 @@
 </div>
 
 <div class="panel panel-default">
-<%= render partial:'comments/index',locals: { comments: @comments} %>
+  <div id="comments_area">
+  <%= render partial:'comments/index',locals: { comments: @comments} %>
+  </div>
 </div>
 
 <div class="panel panel-default">
