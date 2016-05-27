@@ -3,6 +3,6 @@
       <li><%= comment.user %> </li>
       <li><%= comment.content %> </li>
       <li><%= link_to 'Edit', edit_comment_path(comment) %>|
-          <%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+          <%= link_to 'Destroy', blog_comment_path(@blog ,comment), method: :delete, remote:true, data: { confirm: 'Are you sure?' } %></li>
        <% end %>   
     <% end %></ul>
