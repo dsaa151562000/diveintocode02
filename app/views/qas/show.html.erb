@@ -1,0 +1,22 @@
+<div>
+  <strong>Title:</strong>
+  <%= @qa.title %>
+</div>
+
+<div>
+  <strong>Content:</strong>
+  <%= @qa.content %>
+</div>
+
+<div>
+  <strong>Category:</strong>
+  <%= @qa.category_id %>
+</div>
+
+<div>
+  <strong>Language:</strong>
+  <%= @qa.language_id %>
+</div>
+
+<%= link_to 'Edit', edit_qa_path(@qa) %> |
+<%= link_to 'Back', qas_path %>

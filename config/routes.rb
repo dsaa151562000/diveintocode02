@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :qas
   resources :comments
   get 'users/index'
   get 'users/show'

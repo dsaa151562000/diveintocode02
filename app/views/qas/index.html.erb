@@ -1,0 +1,31 @@
+<h1>Listing Qas</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Content</th>
+      <th>Category</th>
+      <th>Language</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @qas.each do |qa| %>
+      <tr>
+        <td><%= qa.title %></td>
+        <td><%= qa.content %></td>
+        <td><%= qa.category_id %></td>
+        <td><%= qa.language_id %></td>
+        <td><%= link_to 'Show', qa %></td>
+        <td><%= link_to 'Edit', edit_qa_path(qa) %></td>
+        <td><%= link_to 'Destroy', qa, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Qa', new_qa_path %>

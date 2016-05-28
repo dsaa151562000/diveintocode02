@@ -48,6 +48,10 @@ gem 'faker-japanese'
 
 gem 'rambulance'
 
+gem 'pry'
+gem 'pry-remote'
+gem 'pry-nav'
+
 
 gem "dotenv-rails", groups: [:development, :test]
 
