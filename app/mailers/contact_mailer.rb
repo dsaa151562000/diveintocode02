@@ -7,4 +7,6 @@ class ContactMailer < ApplicationMailer
      
     mail to: user.email, subject: @message
   end
+  
+  
 end

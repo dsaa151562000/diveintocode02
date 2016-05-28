@@ -11,6 +11,8 @@ class QasController < ApplicationController
   # GET /qas/1
   # GET /qas/1.json
   def show
+    @category = ['プログラミングの相談', 'webアプリ開発', 'ネイティブアプリ開発', 'サーバー・インフラ構築の相談', 'その他（IT・プログラミング）']
+    @language = ['ruby', 'php', 'java', 'c', 'shell script']
   end
 
   # GET /qas/new
@@ -26,10 +28,10 @@ class QasController < ApplicationController
   # POST /qas.json
   def create
     @qa = Qa.new(qa_params)
-
+    
     respond_to do |format|
       if @qa.save
-        format.html { redirect_to @qa, notice: 'Qa was successfully created.' }
+        format.html { redirect_to @qa, notice: 'ご質問を受付ました' }
         format.json { render :show, status: :created, location: @qa }
       else
         format.html { render :new }
