@@ -6,6 +6,9 @@ class QasController < ApplicationController
   # GET /qas.json
   def index
     @qas = Qa.all
+    @user = current_user
+    @category = ['プログラミングの相談', 'webアプリ開発', 'ネイティブアプリ開発', 'サーバー・インフラ構築の相談', 'その他（IT・プログラミング）']
+    @language = ['ruby', 'php', 'java', 'c', 'shell script']
   end
 
   # GET /qas/1
@@ -27,7 +30,9 @@ class QasController < ApplicationController
   # POST /qas
   # POST /qas.json
   def create
-    @qa = Qa.new(qa_params)
+    #@qa = Qa.new(qa_params)
+    #@blog= current_user.blogs.build(blog_params)
+    @qa = current_user.qas.build(qa_params)
     
     respond_to do |format|
       if @qa.save
@@ -74,4 +79,8 @@ class QasController < ApplicationController
     def qa_params
       params.require(:qa).permit(:title, :content, :category_id, :language_id)
     end
+    
+    def program_param
+     @category = ['プログラミングの相談', 'webアプリ開発', 'ネイティブアプリ開発', 'サーバー・インフラ構築の相談', 'その他（IT・プログラミング）']
+   end
 end

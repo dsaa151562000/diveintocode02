@@ -51,7 +51,8 @@ class User < ActiveRecord::Base
 
          
   has_many :blogs, dependent: :destroy
-  has_many :comments
+  has_many :comments, dependent: :destroy
+  has_many :qas, dependent: :destroy
   
   mount_uploader :image, ImageUploader
   

@@ -1,31 +1,21 @@
 <h1>プログラミングに関する質疑応答</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Content</th>
-      <th>Category</th>
-      <th>Language</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
     <% @qas.each do |qa| %>
-      <tr>
-        <td><%= qa.title %></td>
-        <td><%= qa.content %></td>
-        <td><%= qa.category_id %></td>
-        <td><%= qa.language_id %></td>
-        <td><%= link_to 'Show', qa %></td>
-        <td><%= link_to 'Edit', edit_qa_path(qa) %></td>
-        <td><%= link_to 'Destroy', qa, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <ul>
+     <li>投稿者: <%= qa.user.name %></li>
+     <li>ご質問タイトル: <%= qa.title %></li>
+     <li>ご質問内容: <%= qa.content %></li>
+     <li>カテゴリー: <%= @category[qa.category_id-1 ] %></li>
+    <li>プログラミング言語: <%= @language[qa.language_id-1 ] %></li>
+     <%= link_to 'Show', qa %>
+        <% if qa.user.id == @user.id %>
+       ｜ <%= link_to 'Edit', edit_qa_path(qa) %>｜
+        <%= link_to 'Destroy', qa, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% end %>
+        <br>
+      </ul> 
     <% end %>
-  </tbody>
-</table>
-
 <br>
 
-<%= link_to 'New Qa', new_qa_path %>
+<%= link_to 'プログラミングご質問', new_qa_path %>
