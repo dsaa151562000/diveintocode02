@@ -14,8 +14,16 @@ class QasController < ApplicationController
   # GET /qas/1
   # GET /qas/1.json
   def show
+    @qacommnent = @qa.qacomments.build
+    @qacommnents = @qa.qacomments
+    @user = current_user
+    
+    #!@qacommnents=@qacommnents.content.gsub(/\r\n|\r|\n/, "<br />").html_safe
+    
     @category = ['プログラミングの相談', 'webアプリ開発', 'ネイティブアプリ開発', 'サーバー・インフラ構築の相談', 'その他（IT・プログラミング）']
     @language = ['ruby', 'php', 'java', 'c', 'shell script']
+    
+    
   end
 
   # GET /qas/new

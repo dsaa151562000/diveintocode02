@@ -1,0 +1,15 @@
+<div>
+   <div>---------------------------</div>
+    <% qacomments.each do |qacomment| %>
+    <% unless qacomment.id.nil?  %>
+    
+      <div><%= qacomment.content.gsub(/\r\n|\r|\n/, "<br />").html_safe %></div>
+      
+       <% if qacomment.user_id == @user.id %>
+      <div><%= link_to 'Edit', edit_qacomment_path(qacomment) %>|
+      <%= link_to 'Destroy', qacomment, method: :delete, data: { confirm: 'Are you sure?' } %></div>
+      <% end %>
+    <div>---------------------------</div>
+     <% end %> 
+    <% end %></div>
+

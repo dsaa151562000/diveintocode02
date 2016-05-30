@@ -19,5 +19,11 @@
   <%= @language[@qa.language_id-1 ] %>
 </div><br>
 
+<div id="comments_area">
+<%= render partial:'qacomments/index',locals: { qacomments: @qacommnents} %>
+</div>
+
+<%= render partial:'qacomments/form',locals: { qacomment: @qacommnent} %>
+
 <%= link_to 'Edit', edit_qa_path(@qa) %> |
 <%= link_to 'Back', qas_path %>

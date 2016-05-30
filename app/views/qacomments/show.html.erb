@@ -1,0 +1,18 @@
+
+<p>
+  <strong>Qa:</strong>
+  <%= @qacomment.qa %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @qacomment.user %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @qacomment.content %>
+</p>
+
+<%= link_to 'Edit', edit_qacomment_path(@qacomment) %> |
+<%= link_to 'Back', qacomments_path %>

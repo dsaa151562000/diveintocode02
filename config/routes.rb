@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :qacomments
   resources :qas do
    resources :qacomments
   end
