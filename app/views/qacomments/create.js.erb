@@ -1,0 +1,2 @@
+$('#comments_area').html('<%= escape_javascript(render partial:'qacomments/index',locals: { qacomments: @qa.qacomments} ) %>');
+$('textarea').val('')

@@ -12,20 +12,20 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :title %><br>
+    <strong>質問タイトル</strong><br>
     <%= f.text_field :title %>
   </div>
   <div class="field">
-    <%= f.label :content %><br>
+  <strong>質問内容</strong><br>
     <%= f.text_area :content %>
   </div>
   <div class="field">
-    <%= f.label :category_id %><br>
-    <%= f.number_field :category_id %>
+     <strong>カテゴリー</strong><br>
+    <%= select :qa, :category_id, [["プログラミングの相談", 1], ["webアプリ開発", 2], ["ネイティブアプリ開発", 3], ["サーバー・インフラ構築の相談", 4], ["その他（IT・プログラミング）", 5]] %><br>
   </div>
   <div class="field">
-    <%= f.label :language_id %><br>
-    <%= f.number_field :language_id %>
+    <strong>プログラミング言語</strong><br>
+     <%= select :qa, :language_id, [["ruby", 1], ["php", 2], ["java", 3], ["c", 4], ["shell script", 5]] %>
   </div>
   <div class="actions">
     <%= f.submit %>

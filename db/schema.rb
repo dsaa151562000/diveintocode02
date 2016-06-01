@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160528061749) do
+ActiveRecord::Schema.define(version: 20160529130832) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,17 @@ ActiveRecord::Schema.define(version: 20160528061749) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "qacomments", force: :cascade do |t|
+    t.integer  "qa_id"
+    t.integer  "user_id"
+    t.string   "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "qacomments", ["qa_id"], name: "index_qacomments_on_qa_id", using: :btree
+  add_index "qacomments", ["user_id"], name: "index_qacomments_on_user_id", using: :btree
+
   create_table "qas", force: :cascade do |t|
     t.string   "title"
     t.text     "content"
@@ -50,6 +61,7 @@ ActiveRecord::Schema.define(version: 20160528061749) do
     t.integer  "language_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -83,4 +95,6 @@ ActiveRecord::Schema.define(version: 20160528061749) do
 
   add_foreign_key "comments", "blogs"
   add_foreign_key "comments", "users"
+  add_foreign_key "qacomments", "qas"
+  add_foreign_key "qacomments", "users"
 end

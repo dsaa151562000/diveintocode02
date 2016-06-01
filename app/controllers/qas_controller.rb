@@ -6,11 +6,24 @@ class QasController < ApplicationController
   # GET /qas.json
   def index
     @qas = Qa.all
+    @user = current_user
+    @category = ['プログラミングの相談', 'webアプリ開発', 'ネイティブアプリ開発', 'サーバー・インフラ構築の相談', 'その他（IT・プログラミング）']
+    @language = ['ruby', 'php', 'java', 'c', 'shell script']
   end
 
   # GET /qas/1
   # GET /qas/1.json
   def show
+    @qacommnent = @qa.qacomments.build
+    @qacommnents = @qa.qacomments
+    @user = current_user
+    
+    #!@qacommnents=@qacommnents.content.gsub(/\r\n|\r|\n/, "<br />").html_safe
+    
+    @category = ['プログラミングの相談', 'webアプリ開発', 'ネイティブアプリ開発', 'サーバー・インフラ構築の相談', 'その他（IT・プログラミング）']
+    @language = ['ruby', 'php', 'java', 'c', 'shell script']
+    
+    
   end
 
   # GET /qas/new
@@ -25,11 +38,13 @@ class QasController < ApplicationController
   # POST /qas
   # POST /qas.json
   def create
-    @qa = Qa.new(qa_params)
-
+    #@qa = Qa.new(qa_params)
+    #@blog= current_user.blogs.build(blog_params)
+    @qa = current_user.qas.build(qa_params)
+    
     respond_to do |format|
       if @qa.save
-        format.html { redirect_to @qa, notice: 'Qa was successfully created.' }
+        format.html { redirect_to @qa, notice: 'ご質問を受付ました' }
         format.json { render :show, status: :created, location: @qa }
       else
         format.html { render :new }
@@ -72,4 +87,8 @@ class QasController < ApplicationController
     def qa_params
       params.require(:qa).permit(:title, :content, :category_id, :language_id)
     end
+    
+    def program_param
+     @category = ['プログラミングの相談', 'webアプリ開発', 'ネイティブアプリ開発', 'サーバー・インフラ構築の相談', 'その他（IT・プログラミング）']
+   end
 end

@@ -1,0 +1,25 @@
+<%= form_for(@qacomment,remote: true) do |f| %>
+
+  <% if @qacomment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@qacomment.errors.count, "error") %> prohibited this qacomment from being saved:</h2>
+
+      <ul>
+      <% @qacomment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    
+  <div class="field">
+    <%= f.hidden_field :qa_id %>
+   <%= f.hidden_field :user_id %>
+
+    <%= f.text_area :content %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
