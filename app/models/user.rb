@@ -24,6 +24,7 @@ class User < ActiveRecord::Base
   
   def self.find_for_twitter_oauth(auth, signed_in_resource=nil) 
    user = User.where(provider: auth.provider, uid: auth.uid).first
+   #binding.pry
    
    unless user 
      user = User.create(name: auth.info.nickname, 
@@ -34,10 +35,9 @@ class User < ActiveRecord::Base
                         )
      user.skip_confirmation!
      user.save!
+
    end 
   user
-
-
   end
   
   
@@ -51,7 +51,9 @@ class User < ActiveRecord::Base
 
          
   has_many :blogs, dependent: :destroy
-  has_many :comments
+  has_many :comments, dependent: :destroy
+  has_many :qas, dependent: :destroy
+  has_many :qacomments, dependent: :destroy
   
   mount_uploader :image, ImageUploader
   

@@ -1,0 +1,33 @@
+<%= form_for(@qa) do |f| %>
+  <% if @qa.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@qa.errors.count, "error") %> prohibited this qa from being saved:</h2>
+
+      <ul>
+      <% @qa.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <strong>質問タイトル</strong><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+  <strong>質問内容</strong><br>
+    <%= f.text_area :content %>
+  </div>
+  <div class="field">
+     <strong>カテゴリー</strong><br>
+    <%= select :qa, :category_id, [["プログラミングの相談", 1], ["webアプリ開発", 2], ["ネイティブアプリ開発", 3], ["サーバー・インフラ構築の相談", 4], ["その他（IT・プログラミング）", 5]] %><br>
+  </div>
+  <div class="field">
+    <strong>プログラミング言語</strong><br>
+     <%= select :qa, :language_id, [["ruby", 1], ["php", 2], ["java", 3], ["c", 4], ["shell script", 5]] %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

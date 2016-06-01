@@ -1,0 +1,21 @@
+<h1>プログラミングに関する質疑応答</h1>
+
+
+    <% @qas.each do |qa| %>
+    <ul>
+     <li>投稿者: <%= qa.user.name %></li>
+     <li>ご質問タイトル: <%= qa.title %></li>
+     <li>ご質問内容: <%= qa.content %></li>
+     <li>カテゴリー: <%= @category[qa.category_id-1 ] %></li>
+    <li>プログラミング言語: <%= @language[qa.language_id-1 ] %></li>
+     <%= link_to 'Show', qa %>
+        <% if qa.user.id == @user.id %>
+       ｜ <%= link_to 'Edit', edit_qa_path(qa) %>｜
+        <%= link_to 'Destroy', qa, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% end %>
+        <br>
+      </ul> 
+    <% end %>
+<br>
+
+<%= link_to 'プログラミングご質問', new_qa_path %>
