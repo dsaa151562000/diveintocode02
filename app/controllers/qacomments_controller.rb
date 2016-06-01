@@ -23,6 +23,9 @@ class QacommentsController < ApplicationController
   def edit
   end
 
+  #擬似的なUser構造体を作る
+	User2 = Struct.new(:name, :email)
+
   # POST /qacomments
   # POST /qacomments.json
   def create
@@ -30,10 +33,14 @@ class QacommentsController < ApplicationController
 
     respond_to do |format|
       if @qacomment.save
+        user = User2.new("name", "suzuki02yo@gmail.com")
+       # deliverメソッドを使って、メールを送信する
+       QacommentMailer.contact_email(user, @qacomment).deliver
         format.html { redirect_to qa_path(@qacomment.qa), notice: 'Qacomment was successfully created.' }
         format.json { render :show, status: :created, location: @qacomment }
         @qa = @qacomment.qa
         format.js
+
       else
         format.html { render :new }
         format.json { render json: @qacomment.errors, status: :unprocessable_entity }

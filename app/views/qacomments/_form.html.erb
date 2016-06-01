@@ -1,4 +1,4 @@
-<%= form_for(@qacomment) do |f| %>
+<%= form_for(@qacomment,remote: true) do |f| %>
 
   <% if @qacomment.errors.any? %>
     <div id="error_explanation">
