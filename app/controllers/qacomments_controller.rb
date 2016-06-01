@@ -5,7 +5,6 @@ class QacommentsController < ApplicationController
   # GET /qacomments.json
   def index
     @qacomments = Qacomment.all
-
     @user = current_user
   end
 
@@ -31,8 +30,10 @@ class QacommentsController < ApplicationController
 
     respond_to do |format|
       if @qacomment.save
-        format.html { redirect_to @qacomment, notice: 'Qacomment was successfully created.' }
+        format.html { redirect_to qa_path(@qacomment.qa), notice: 'Qacomment was successfully created.' }
         format.json { render :show, status: :created, location: @qacomment }
+        @qa = @qacomment.qa
+        format.js
       else
         format.html { render :new }
         format.json { render json: @qacomment.errors, status: :unprocessable_entity }
@@ -45,7 +46,7 @@ class QacommentsController < ApplicationController
   def update
     respond_to do |format|
       if @qacomment.update(qacomment_params)
-        format.html { redirect_to @qacomment, notice: 'Qacomment was successfully updated.' }
+        format.html { redirect_to qa_path(@qacomment.qa), notice: 'Qacomment was successfully updated.' }
         format.json { render :show, status: :ok, location: @qacomment }
       else
         format.html { render :edit }
@@ -59,7 +60,7 @@ class QacommentsController < ApplicationController
   def destroy
     @qacomment.destroy
     respond_to do |format|
-      format.html { redirect_to qacomments_url, notice: 'Qacomment was successfully destroyed.' }
+      format.html { redirect_to qa_path(@qacomment.qa), notice: 'Qacomment was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

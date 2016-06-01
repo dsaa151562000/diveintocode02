@@ -1,3 +1,8 @@
+ <div>
+   <strong>投稿者</strong><br>
+  <%= @qa.user.name %>
+</div><br>
+
 
 <div>
    <strong>質問タイトル</strong><br>
@@ -18,12 +23,13 @@
    <strong>プログラミング言語</strong><br>
   <%= @language[@qa.language_id-1 ] %>
 </div><br>
-
+<br>
+<div>↓以下コメント↓</div>
 <div id="comments_area">
 <%= render partial:'qacomments/index',locals: { qacomments: @qacommnents} %>
 </div>
 
-<%= render partial:'qacomments/form',locals: { qacomment: @qacommnent} %>
+<%= render partial:'qacomments/form_1',locals: { qacomment: @qacommnent} %>
 
 <%= link_to 'Edit', edit_qa_path(@qa) %> |
 <%= link_to 'Back', qas_path %>

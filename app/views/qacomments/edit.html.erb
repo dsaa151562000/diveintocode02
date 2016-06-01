@@ -1,6 +1,6 @@
 <h1>Editing Qacomment</h1>
 
-<%= render 'form' %>
+<%= render partial:'form',locals: {qacomment: @qacommnent} %>
 
 <%= link_to 'Show', @qacomment %> |
 <%= link_to 'Back', qacomments_path %>
