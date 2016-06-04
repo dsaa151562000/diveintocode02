@@ -7,6 +7,12 @@ class UsersController < ApplicationController
    @user = User.find(params[:id])
   end
   
+  def following
+    @user = User.find(params[:id])
+    @users = @user.followed_users
+    render 'show_follow'
+  end
+  
   private
   def user_params
     params.require(:user).permit(:name, :description, :image)
