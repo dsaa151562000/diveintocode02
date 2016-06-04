@@ -15,7 +15,15 @@ Rails.application.routes.draw do
    passwords: "users/passwords",
    omniauth_callbacks: "users/omniauth_callbacks" 
   }
-
+  
+  resources :users, only:[:index, :show, :update] do
+   member do
+    get :following, :followers;    
+   end
+  end
+  
+  resources :relationships, only:[:create, :destroy]
+  
   root to: "top#index"
   get 'contact/index'
   get 'contact/new'
