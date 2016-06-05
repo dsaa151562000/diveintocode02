@@ -3,6 +3,10 @@ Rails.application.routes.draw do
 
   get 'relationships/destroy'
 
+  get 'relationships/create'
+
+  get 'relationships/destroy'
+
   resources :qacomments
   resources :qas do
    resources :qacomments
