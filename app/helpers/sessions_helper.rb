@@ -1,6 +1,6 @@
 module SessionsHelper
  def signed_in?
-　#ログインしているか、否かを判定するメソッド
+#ログインしているか、否かを判定するメソッド
   !current_user.nil?
  end
  
