@@ -4,6 +4,20 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable , :omniauthable
          
+  has_many :blogs, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :qas, dependent: :destroy
+  has_many :qacomments, dependent: :destroy
+
+ #第一段階　「中間テーブルと関係を定義する」
+  has_many :relationships,foreign_key: "follower_id", dependent: :destroy
+  has_many :reverse_relationships,foreign_key:"followed_id",class_name: "Relationship", dependent: :destroy
+  
+  #第三段階　「相対的な参照を定義する」
+  has_many :followed_users,through: :relationships,source: :followed
+  has_many :followers,through: :reverse_relationships,source: :follower
+  
+
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil) 
     user = User.where(provider: auth.provider, uid: auth.uid).first
    
@@ -48,12 +62,41 @@ class User < ActiveRecord::Base
   def self.create_unique_email 
      User.create_unique_string + "@example.com" 
   end
+  
+  #指定のユーザーをフォローする
+  def follow!(other_user)
+   relationships.create!(followed_id: other_user.id)
+  end
+  
+  #指定のユーザーのフォローを解除する
+   def unfollow!(other_user)
+    relationships.find_by(followed_id: other_user).destroy
+  end
+  
+   #フォローしているかどうか確認する
+   def following?(other_user)
+    relationships.find_by(followed_id: other_user.id)
+   end
+  
+   #自分がフォローしあっているユーザを確認する
+   def friend
+    User.from_users_followed_by(self)
+   end
+   
+   
+  #フォローしあっているユーザ一覧を取得する
+   def from_users_followed_by(user)
+     followed_user_ids="SELECT X.id FROM(SELECT users.* FROM
+     users INNER JOIN relationships ON users.id =
+     relationships.followed_id WHERE relationships.follower_id = :user_id) 
+     X INNER JOIN(SELECT users.* FROM users INNER JOIN 
+     relationships ON users.id = relationships.follower_id WHERE 
+     relationships.followed_id = :user_id) Y ON X.id = Y.id"
+     where("id IN#{followed_user_ids}",user_id:user.id)
+   end
+    
+    
 
-         
-  has_many :blogs, dependent: :destroy
-  has_many :comments, dependent: :destroy
-  has_many :qas, dependent: :destroy
-  has_many :qacomments, dependent: :destroy
   
   mount_uploader :image, ImageUploader
   
