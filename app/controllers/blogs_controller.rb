@@ -8,6 +8,10 @@ class BlogsController < ApplicationController
   def index
     @blogs = Blog.all
     @user = current_user
+    
+    @fiend = current_user.friend
+    @fiend = Array(@fiend)
+
   end
 
   # GET /blogs/1

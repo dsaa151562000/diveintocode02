@@ -11,31 +11,31 @@
    
     <% if blog.user.name != nil %>
     
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h3 class="panel-title"><%= blog.title %></h3>
-      </div>
-      <div class="panel-body">
+     <% if @fiend.to_a[0][:id] == blog.user.id %>
+     
+
+     <div class="panel panel-primary">
+       <div class="panel-heading">
+         <h3 class="panel-title"><%= blog.title %></h3>
+       </div>
+       <div class="panel-body">
         <%= blog.content %><br/>
       　 <em> <%= l blog.created_at, format: :default %></em><br>
+       　<em>投稿者id:<%= blog.user.id %></em><br>
        　<em>投稿者:<%= blog.user.name %></em><br>
          <em>blog ID:<%= blog.id %></em><br>
-         
-
          <img alt="Flower" height="40" src=<%=profile_img blog.user %> width="40"  />
-     
-         
          <% if blog.user.id == @user.id %>
-         <br><br>
+          <br><br>
           <%= link_to "削除",blog_path(blog.id),data: {confirm: "本当に削除しますか？"},:method => :delete %><br>
           <%= link_to 'Edit', edit_blog_path(blog.id) %> 
-        <% end %>
- 
+         <% end %>
+       </div>
       </div>
-    </div>
-    
-    <% end %>
-    
+      
+      <% end %>
+     <% end %>
+
     <% end %>
 
 <br>
