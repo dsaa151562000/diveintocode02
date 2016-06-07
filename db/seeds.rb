@@ -36,19 +36,19 @@
 #               )
 # end
 
-# 1000.times do |n|
-# n += 1
-# title = "ダミータイトル#{n+1}"
-# content = "ダミー内容-#{n+1}"
-# Blog.create!(title: title,content: content,user_id: n)
-# end
-
-100.times do |n|
- n += 1
- User.create(
-   name: "Test Diver#{n}",
-   email: "diveintocode#{n}@example.com",
-   password: "iwillbeanengineer",
-   uid: "#{n}"
-   )
+20.times do |n|
+n += 1
+title = "ダミータイトル#{n+1}"
+content = "ダミー内容-#{n+1}"
+Blog.create!(title: title,content: content,user_id: n)
 end
+
+# 20.times do |n|
+#  n += 1
+#  User.create(
+#    name: "Test Diver#{n}",
+#    email: "diveintocode#{n}@example.com",
+#    password: "iwillbeanengineer",
+#    uid: "#{n}"
+#    )
+# end

@@ -7,10 +7,18 @@ class BlogsController < ApplicationController
   # GET /blogs.json
   def index
     @blogs = Blog.all
+    @item = Blog.page(params[:page])
+
     @user = current_user
-    
     @fiend = current_user.friend
-    @fiend = Array(@fiend)
+
+    if @fiend .present?
+      @fiend
+    else
+      @fiend = nil
+    end
+   # binding pry
+    
 
   end
 
