@@ -8,9 +8,11 @@
 
     <% @blogs.each do |blog| %>
      <% if blog.user.name != nil %>
-　　　<% if @fiend != nil %>
-        <% if @fiend.to_a[0][:id] == blog.user.id || current_user.id == blog.user.id %>
-     
+　　　<% if @friend != nil %>
+　　　
+        <% if @friend.ids.include?(blog.user.id) || current_user.id == blog.user.id %>
+        
+  
 
      <div class="panel panel-primary">
        <div class="panel-heading">
@@ -37,7 +39,7 @@
     <% end %>
 
 
-<%= paginate(@item) %>
+
 <br>
 <%= link_to 'New Blog', new_blog_path %>|
 <%= link_to 'Back', blogs_path %>|

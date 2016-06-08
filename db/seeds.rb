@@ -46,9 +46,9 @@ end
 # 20.times do |n|
 #  n += 1
 #  User.create(
-#    name: "Test Diver#{n}",
-#    email: "diveintocode#{n}@example.com",
-#    password: "iwillbeanengineer",
-#    uid: "#{n}"
-#    )
+#     name: "Test Diver#{n}",
+#     email: "diveintocode#{n}@example.com",
+#     password: "iwillbeanengineer",
+#     uid: "#{n}"
+#     )
 # end

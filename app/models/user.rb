@@ -93,7 +93,7 @@ class User < ActiveRecord::Base
      where("id IN (#{followed_user_ids})", user_id: user.id)
    end
     
-    
+  #paginates_per 5
 
   
   mount_uploader :image, ImageUploader
