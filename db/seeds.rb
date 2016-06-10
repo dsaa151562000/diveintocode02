@@ -54,9 +54,8 @@
 # end
 
  User.create(
-    id: "3",
-    name: "Test Diver3",
-    email: "diveintocode3@example.com",
+    name: "aaa Diver3",
+    email: "bbb@bbb.com",
     password: "iwillbeanengineer",
     uid: "3"
     )
