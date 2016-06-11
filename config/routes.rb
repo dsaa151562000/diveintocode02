@@ -1,17 +1,14 @@
 Rails.application.routes.draw do
+  resources :tasks
   get 'relationships/create'
-
   get 'relationships/destroy'
-
   get 'relationships/create'
-
   get 'relationships/destroy'
 
   resources :qacomments
   resources :qas do
    resources :qacomments
   end
-  
   
   resources :comments
   get 'users/index'
@@ -25,6 +22,7 @@ Rails.application.routes.draw do
   }
   
   resources :users, only:[:index, :show, :update] do
+   resources :tasks
    member do
     get :following, :followers;    
    end
