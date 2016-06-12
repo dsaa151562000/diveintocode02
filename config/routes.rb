@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+ 
+
+
+
   resources :tasks
   get 'relationships/create'
   get 'relationships/destroy'
@@ -35,6 +39,8 @@ Rails.application.routes.draw do
    post "goodjob"
   end
  end
+ 
+
   
   resources :relationships, only:[:create, :destroy]
   
