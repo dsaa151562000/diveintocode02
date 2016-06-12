@@ -17,7 +17,8 @@ class User < ActiveRecord::Base
   has_many :followed_users,through: :relationships,source: :followed
   has_many :followers,through: :reverse_relationships,source: :follower
   
-
+  has_many :tasks, dependent: :destroy
+  
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil) 
     user = User.where(provider: auth.provider, uid: auth.uid).first
    
@@ -93,7 +94,11 @@ class User < ActiveRecord::Base
      where("id IN (#{followed_user_ids})", user_id: user.id)
    end
     
-  #paginates_per 5
+  #フォローしている人のタスクフィードを取得する
+  def taskfeed
+   tasks = Task.where(user_id: self)
+   Task.from_users_followed_by(self).order("updated_at DESC")
+  end
 
   
   mount_uploader :image, ImageUploader

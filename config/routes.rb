@@ -28,6 +28,14 @@ Rails.application.routes.draw do
    end
   end
   
+  namespace :taskline do
+   resources :tasks do
+   resources :task_comment
+   post "ungoodjob"
+   post "goodjob"
+  end
+ end
+  
   resources :relationships, only:[:create, :destroy]
   
   root to: "top#index"

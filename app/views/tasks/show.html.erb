@@ -1,39 +1,39 @@
-<p id="notice"><%= notice %></p>
 
-<p>
+<div>
   <strong>User:</strong>
-  <%= @task.user %>
-</p>
+  <%= @task.user.name %>
+</div>
 
-<p>
+<div>
   <strong>Title:</strong>
   <%= @task.title %>
-</p>
+</div>
 
-<p>
+<div>
   <strong>Content:</strong>
   <%= @task.content %>
-</p>
+</div>
 
-<p>
+<div>
   <strong>Deadline:</strong>
   <%= @task.deadline %>
-</p>
+</div>
 
-<p>
+<div>
   <strong>Charge:</strong>
-  <%= @task.charge_id %>
-</p>
+  <%= @task.charge.name %>
+</div>
 
-<p>
+<div>
   <strong>Done:</strong>
-  <%= @task.done %>
-</p>
+  <%= if @task.done? then "完了" else "未完了" end%>
+  
+</div>
 
-<p>
+<div>
   <strong>Status:</strong>
-  <%= @task.status %>
-</p>
+   <%= if @task.status ==1 then "対応中" elsif @task.status ==0 then "未着手" end %>
+</div>
 
-<%= link_to 'Edit', edit_task_path(@task) %> |
-<%= link_to 'Back', tasks_path %>
+<%= link_to 'Edit', edit_user_task_path(@task.user, @task) %> |
+<%= link_to 'Back', user_tasks_path(@task.user) %>
