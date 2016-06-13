@@ -8,7 +8,7 @@ class Taskline::TasksController < ApplicationController
     　#該当のタスクへの自分がグッジョブした件数をカウント
     　gdcount = Goodjob.where(task_id: goodjob_params[:task_id], user_id: current_user.id).count
     　
-    　if gdcount == 0 then
+      if gdcount == 0 then
     　#過去に自分がグッジョブしていなければそのまま新規登録（insert文）
     　@gjb = Goodjob.create(user_id: current_user.id, task_id: goodjob_params[:task_id], number: 1) 
     　else @gjb = Goodjob.find_by(user_id: current_user.id, task_id: goodjob_params[:task_id])

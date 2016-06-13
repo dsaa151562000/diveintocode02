@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Taskline Task Comments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Task</th>
+      <th>Content</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @taskline_task_comments.each do |taskline_task_comment| %>
+      <tr>
+        <td><%= taskline_task_comment.user %></td>
+        <td><%= taskline_task_comment.task %></td>
+        <td><%= taskline_task_comment.content %></td>
+        <td><%= link_to 'Show', taskline_task_comment %></td>
+        <td><%= link_to 'Edit', edit_taskline_task_comment_path(taskline_task_comment) %></td>
+        <td><%= link_to 'Destroy', taskline_task_comment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Task comment', new_taskline_task_comment_path %>

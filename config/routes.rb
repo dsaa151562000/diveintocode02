@@ -3,6 +3,9 @@ Rails.application.routes.draw do
 
 
 
+  namespace :taskline do
+    resources :task_comments
+  end
   resources :tasks
   get 'relationships/create'
   get 'relationships/destroy'
