@@ -5,28 +5,31 @@ class Taskline::TasksController < ApplicationController
   end
 
   def goodjob
-    　#該当のタスクへの自分がグッジョブした件数をカウント
-    　gdcount = Goodjob.where(task_id: goodjob_params[:task_id], user_id: current_user.id).count
-    　
-      if gdcount == 0 then
-    　#過去に自分がグッジョブしていなければそのまま新規登録（insert文）
-    　@gjb = Goodjob.create(user_id: current_user.id, task_id: goodjob_params[:task_id], number: 1) 
-    　else @gjb = Goodjob.find_by(user_id: current_user.id, task_id: goodjob_params[:task_id])
-    　#過去に自分がグッジョブしていればカウントアップして追加登録(UPDATE文)
-    　@gjb.number = @gjb.number + 1
-    　@gjb.update(user_id: current_user.id)
-    　end
-    　
-    　@gjb_all_cnt = Goodjob.where(task_id: goodjob_params[:task_id]).sum(:number)
-    　#JavaScriptで画面表示を変更
-    　respond_to do |format|
-       format.js    
+    gdcount = Goodjob.where(task_id: goodjob_params[:task_id], user_id: current_user.id).count
+     if gdcount == 0 then
+       @gjb = Goodjob.create(user_id: current_user.id, task_id: goodjob_params[:task_id], number: 1) 
+       
+     else
+      @gjb = Goodjob.find_by(user_id: current_user.id, task_id: goodjob_params[:task_id])
+      #過去に自分がグッジョブしていればカウントアップして追加登録(UPDATE文)
+      @gjb.number = @gjb.number + 1
+      @gjb.update(user_id: current_user.id)
+      
+     end
+     
+     @gjb_all_cnt = Goodjob.where(task_id: goodjob_params[:task_id]).sum(:number)
+     #JavaScriptで画面表示を変更
+     respond_to do |format|
+       format.js
       end
   end
 
   def index
     #自分とフォロー相手のタスクを表示する
-    @feed_tasks = current_user.taskfeed
+    @feed_tasks = current_user.taskfeed.page(params[:page])
+    @users = TaskComment.page(params[:page])
+    #binding pry
+    
     
     #タスクにコメントするためにモデルオブジェクトを生成
     @taskline_task_comment = TaskComment.new
@@ -56,7 +59,7 @@ class Taskline::TasksController < ApplicationController
   private
    def task_params
      params.require(:task).permit(:title, :content, :user_id, :charge_id, :deadline, :done, :status)
-  end
+   end
   
   def task_comment_params
      params.require(:comment).permit(:user_id, :task_id, :content)

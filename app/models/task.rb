@@ -13,7 +13,7 @@ class Task < ActiveRecord::Base
      X INNER JOIN (SELECT users.* FROM users INNER JOIN relationships
      ON users.id = relationships.follower_id WHERE 
      relationships.followed_id = :user_id ) Y ON X.id = Y.id"
-     where("id IN (#{followed_user_ids})", user_id: user.id)
+     where("user_id IN (#{followed_user_ids}) OR user_id = :user_id", user_id: user.id)
    end
   
 end

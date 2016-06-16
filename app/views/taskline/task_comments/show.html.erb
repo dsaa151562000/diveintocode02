@@ -1,19 +1,17 @@
-<p id="notice"><%= notice %></p>
-
-<p>
+<div>
   <strong>User:</strong>
   <%= @taskline_task_comment.user %>
-</p>
+</div>
 
-<p>
+<div>
   <strong>Task:</strong>
   <%= @taskline_task_comment.task %>
-</p>
+</div>
 
-<p>
+<div>
   <strong>Content:</strong>
   <%= @taskline_task_comment.content %>
-</p>
+</div>
 
 <%= link_to 'Edit', edit_taskline_task_comment_path(@taskline_task_comment) %> |
 <%= link_to 'Back', taskline_task_comments_path %>

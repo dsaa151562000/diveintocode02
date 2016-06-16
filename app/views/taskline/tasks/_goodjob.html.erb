@@ -1,0 +1,8 @@
+<%= form_for(goodjob, url: taskline_task_goodjob_path(task_id: goodjob.task_id), remote: true) do |f| %>
+  <div class="field">
+
+    <%= hidden_field_tag 'tgoodjob[user_id]', current_user.id %>
+    <%= f.hidden_field :task_id %>
+  </div>
+    <%= f.submit 'Goodjob!!' %>
+<% end %>

@@ -56,6 +56,8 @@ class Taskline::TaskCommentsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to taskline_task_comments_url, notice: 'Task comment was successfully destroyed.' }
       format.json { head :no_content }
+      @task = @taskline_task_comment.task
+      format.js { render :index, notice: 'Task comment was successfully destroyed.' }
     end
   end
 
@@ -67,6 +69,6 @@ class Taskline::TaskCommentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def taskline_task_comment_params
-      params.require(:taskline_task_comment).permit(:user_id, :task_id, :content)
+      params.require(:task_comment).permit(:user_id, :task_id, :content)
     end
 end

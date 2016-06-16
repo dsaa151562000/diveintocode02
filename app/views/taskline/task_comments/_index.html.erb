@@ -1,0 +1,33 @@
+
+
+<h1>Listing Taskline Task Comments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Task</th>
+      <th>Content</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% task_comments.each do |task_comment| %>
+      <tr>
+        <% unless task_comment.id.nil? %>
+        <td><%= task_comment.user.name %></td>
+        <td><%= task_comment.task.id %></td>
+        <td><%= task_comment.content %></td>
+        <td><%= link_to 'Show', taskline_task_comment_path(task_comment) %></td>
+        <td><%= link_to 'Edit', edit_taskline_task_comment_path(task_comment.task_id, task_comment) %></td>
+        <td><%= link_to 'Destroy', taskline_task_comment_path(task_comment), method: :delete, remote: true, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+     <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Task comment', new_taskline_task_comment_path %>

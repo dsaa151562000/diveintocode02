@@ -1,10 +1,10 @@
-<%= form_for(@taskline_task_comment) do |f| %>
-  <% if @taskline_task_comment.errors.any? %>
+<%= form_for([ :taskline, task_comment], remote: true ) do |f| %>
+  <% if task_comment.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@taskline_task_comment.errors.count, "error") %> prohibited this taskline_task_comment from being saved:</h2>
+      <h2><%= pluralize(task_comment.errors.count, "error") %> prohibited this taskline_task_comment from being saved:</h2>
 
       <ul>
-      <% @taskline_task_comment.errors.full_messages.each do |message| %>
+      <% task_comment.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -12,15 +12,10 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.text_field :user_id %>
+    <%= f.hidden_field :task_id %>
+    <%= hidden_field_tag 'task_comment[user_id]', current_user.id %>
   </div>
   <div class="field">
-    <%= f.label :task_id %><br>
-    <%= f.text_field :task_id %>
-  </div>
-  <div class="field">
-    <%= f.label :content %><br>
     <%= f.text_field :content %>
   </div>
   <div class="actions">
