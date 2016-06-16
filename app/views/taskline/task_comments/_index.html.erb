@@ -12,6 +12,7 @@
     </tr>
   </thead>
 
+
   <tbody>
     <% task_comments.each do |task_comment| %>
       <tr>
@@ -20,8 +21,11 @@
         <td><%= task_comment.task.id %></td>
         <td><%= task_comment.content %></td>
         <td><%= link_to 'Show', taskline_task_comment_path(task_comment) %></td>
-        <td><%= link_to 'Edit', edit_taskline_task_comment_path(task_comment.task_id, task_comment) %></td>
+        <% if task_comment.user.id ==current_user.id %>
+         <td><%= link_to 'Edit', edit_taskline_task_comment_path(task_comment.task_id, task_comment) %></td>
         <td><%= link_to 'Destroy', taskline_task_comment_path(task_comment), method: :delete, remote: true, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+       
       </tr>
      <% end %>
     <% end %>
