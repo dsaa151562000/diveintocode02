@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
  
-
-
-
   resources :customers
   resources :customers
+  
   resources :projects
+  resources :projects do
+   resources :projecttasks
+  end
+  
   namespace :taskline do
     resources :task_comments
   end
@@ -47,7 +49,6 @@ Rails.application.routes.draw do
  end
  
 
-  
   resources :relationships, only:[:create, :destroy]
   
   root to: "top#index"
