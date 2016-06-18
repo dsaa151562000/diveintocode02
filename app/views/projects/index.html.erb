@@ -22,7 +22,7 @@
         <td><%= project.user.name %></td>
         <td><%= project.content %></td>
         <td><%= project.deadline.strftime("%Y年%m月%d日") %></td>
-        <td><%= project.customer_id %></td>
+        <td><%= project.customer.customer_name %></td>
         <td><%= if project.status ==1 then "対応中" elsif project.status ==0 then "未着手" end %></td>
         <td><%= link_to 'Show', project %></td>
         <td><%= link_to 'Edit', edit_project_path(project) %></td>

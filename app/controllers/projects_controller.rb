@@ -15,10 +15,13 @@ class ProjectsController < ApplicationController
   # GET /projects/new
   def new
     @project = Project.new
+    @customers = Customer.all
+    #binding pry
   end
 
   # GET /projects/1/edit
   def edit
+    @customers = Customer.all
   end
 
   # POST /projects
