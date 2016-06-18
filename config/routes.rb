@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
 
 
+  resources :customers
+  resources :projects
   namespace :taskline do
     resources :task_comments
   end

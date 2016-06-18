@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Projects</h1>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>プロジェクト名</th>
+      <th>作成者</th>
+      <th>概要</th>
+      <th>締め切り</th>
+      <th>顧客</th>
+      <th>ステータス</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @projects.each do |project| %>
+      <tr>
+        <td><%= project.title %></td>
+        <td><%= project.user.name %></td>
+        <td><%= project.content %></td>
+        <td><%= project.deadline.strftime("%Y年%m月%d日") %></td>
+        <td><%= project.customer_id %></td>
+        <td><%= if project.status ==1 then "対応中" elsif project.status ==0 then "未着手" end %></td>
+        <td><%= link_to 'Show', project %></td>
+        <td><%= link_to 'Edit', edit_project_path(project) %></td>
+        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Project', new_project_path %>

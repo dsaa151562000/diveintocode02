@@ -1,0 +1,39 @@
+
+
+<div>
+  <strong>プロジェクト名:</strong>
+  <%= @project.title %>
+</div>
+
+<div>
+  <strong>作成者:</strong>
+  <%= @project.user.name %>
+</div>
+
+<div>
+  <strong>内容:</strong>
+  <%= @project.content %>
+</div>
+
+<div>
+  <strong>締め切り:</strong>
+  <%= @project.deadline.strftime("%Y年%m月%d日") %>
+</div>
+
+<div>
+  <strong>顧客:</strong>
+  <%= @project.customer_id %>
+</div>
+
+<div>
+  <strong>完了:</strong>
+  <%= if @project.done? then "完了" else "未完了" end%>
+</div>
+
+<div>
+  <strong>ステータス:</strong>
+  <%= if @project.status ==1 then "対応中" elsif @project.status ==0 then "未着手" end %>
+</div>
+
+<%= link_to 'Edit', edit_project_path(@project) %> |
+<%= link_to 'Back', projects_path %>

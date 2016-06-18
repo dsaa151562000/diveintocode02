@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  project_id: 
+  customer_name: MyString
+
+two:
+  project_id: 
+  customer_name: MyString
