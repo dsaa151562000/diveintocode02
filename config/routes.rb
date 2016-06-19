@@ -1,24 +1,18 @@
 Rails.application.routes.draw do
  
+  resources :memberships
   resources :projecttasks
   resources :customers
   
   resources :projects do
    resources :projecttasks
-    member do
-    get :membering;    
-   end
-   
   end
   
   namespace :taskline do
     resources :task_comments
   end
   resources :tasks
-  get 'relationships/create'
-  get 'relationships/destroy'
-  get 'relationships/create'
-  get 'relationships/destroy'
+
 
   resources :qas do
    resources :qacomments
