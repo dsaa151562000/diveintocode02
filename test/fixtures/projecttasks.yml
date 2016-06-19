@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  project_id: 
+  projecttask_title: MyString
+  projecttask_content: MyText
+  projecttask_deadline: 2016-06-18 06:37:41
+  projecttask_charge_id: 1
+  projecttask_done: false
+  projecttask_status: 1
+
+two:
+  user_id: 
+  project_id: 
+  projecttask_title: MyString
+  projecttask_content: MyText
+  projecttask_deadline: 2016-06-18 06:37:41
+  projecttask_charge_id: 1
+  projecttask_done: false
+  projecttask_status: 1

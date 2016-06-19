@@ -1,0 +1,42 @@
+<div>
+  <strong>User:</strong>
+  <%= @projecttask.user.name %>
+</div>
+
+<div>
+  <strong>Project:</strong>
+  <%= @projecttask.project_id %>
+</div>
+
+<div>
+  <strong>Projecttask title:</strong>
+  <%= @projecttask.projecttask_title %>
+</div>
+
+<div>
+  <strong>Projecttask content:</strong>
+  <%= @projecttask.projecttask_content %>
+</div>
+
+<div>
+  <strong>Projecttask deadline:</strong>
+  <%= @projecttask.projecttask_deadline %>
+</div>
+
+<div>
+  <strong>Projecttask charge:</strong>
+  <%= @projecttask.projecttask_charge_id %>
+</div>
+
+<div>
+  <strong>Projecttask done:</strong>
+  <%= @projecttask.projecttask_done %>
+</div>
+
+<div>
+  <strong>Projecttask status:</strong>
+  <%= @projecttask.projecttask_status %>
+</div>
+
+<%= link_to 'Edit', edit_projecttask_path(@projecttask) %> |
+<%= link_to 'Back', projecttasks_path %>

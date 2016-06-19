@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160618031229) do
+ActiveRecord::Schema.define(version: 20160618063741) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,22 @@ ActiveRecord::Schema.define(version: 20160618031229) do
   end
 
   add_index "projects", ["user_id"], name: "index_projects_on_user_id", using: :btree
+
+  create_table "projecttasks", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.string   "projecttask_title"
+    t.text     "projecttask_content"
+    t.datetime "projecttask_deadline"
+    t.integer  "projecttask_charge_id"
+    t.boolean  "projecttask_done"
+    t.integer  "projecttask_status"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  add_index "projecttasks", ["project_id"], name: "index_projecttasks_on_project_id", using: :btree
+  add_index "projecttasks", ["user_id"], name: "index_projecttasks_on_user_id", using: :btree
 
   create_table "qacomments", force: :cascade do |t|
     t.integer  "qa_id"
@@ -157,6 +173,8 @@ ActiveRecord::Schema.define(version: 20160618031229) do
   add_foreign_key "comments", "blogs"
   add_foreign_key "comments", "users"
   add_foreign_key "projects", "users"
+  add_foreign_key "projecttasks", "projects"
+  add_foreign_key "projecttasks", "users"
   add_foreign_key "qacomments", "qas"
   add_foreign_key "qacomments", "users"
   add_foreign_key "tasks", "users"

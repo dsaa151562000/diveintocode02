@@ -1,0 +1,40 @@
+
+<h3><%= @project.title %>のタスク</h3>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Project</th>
+      <th>Projecttask title</th>
+      <th>Projecttask content</th>
+      <th>Projecttask deadline</th>
+      <th>Projecttask charge</th>
+      <th>Projecttask done</th>
+      <th>Projecttask status</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @projecttasks.each do |projecttask| %>
+      <tr>
+        <td><%= projecttask.user.name %></td>
+        <td><%= projecttask.project_id %></td>
+        <td><%= projecttask.projecttask_title %></td>
+        <td><%= projecttask.projecttask_content %></td>
+        <td><%= projecttask.projecttask_deadline %></td>
+        <td><%= projecttask.projecttask_charge_id %></td>
+        <td><%= projecttask.projecttask_done %></td>
+        <td><%= projecttask.projecttask_status %></td>
+        <td><%= link_to 'Show', projecttask %></td>
+        <td><%= link_to 'Edit', edit_projecttask_path(projecttask) %></td>
+        <td><%= link_to 'Destroy', projecttask, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Projecttask', new_projecttask_path %>
