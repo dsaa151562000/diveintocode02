@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   
   resources :projects do
    resources :projecttasks
+   member do
+    get :membering;
+   end
   end
   
   namespace :taskline do

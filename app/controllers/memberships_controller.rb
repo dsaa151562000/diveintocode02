@@ -60,6 +60,11 @@ class MembershipsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  
+  def  membering
+    @users = User.page(params[:page])
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
