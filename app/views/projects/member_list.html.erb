@@ -1,0 +1,9 @@
+
+<% provide(:title, 'メンバー一覧') %>
+<h4>プロジェクト作成者</h4>
+<%=@project_master.user.name %>
+<h4>メンバー一覧</h4>
+<div>
+  <%= render 'member', locals: { member: @member_list }%>
+</div>
+

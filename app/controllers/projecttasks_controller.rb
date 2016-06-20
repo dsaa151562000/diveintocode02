@@ -1,11 +1,20 @@
 class ProjecttasksController < ApplicationController
   before_action :set_projecttask, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /projecttasks
   # GET /projecttasks.json
   def index
     @projecttasks = Projecttask.all
     @project = Project.find(params[:project_id])
+    
+    @users = User.all
+    
+    @pj_num = params[:project_id]
+    @member_list = Membership.where(project_id: @pj_num)
+    #binding.pry
+    
+
   end
 
   # GET /projecttasks/1
@@ -18,6 +27,12 @@ class ProjecttasksController < ApplicationController
     @projecttask = Projecttask.new
     #Parameters: {"project_id"=>"6"}
     @pj_num = params[:project_id]
+    @member_list = Membership.where(project_id: @pj_num)
+    
+    @members_for_options = Hash.new
+    @member_list.each do |member|
+      @members_for_options.store(member.user.name, member.user.id)
+    end
     #binding pry
   end
 

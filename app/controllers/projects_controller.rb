@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /projects
   # GET /projects.json
@@ -16,6 +17,7 @@ class ProjectsController < ApplicationController
   def new
     @project = Project.new
     @customers = Customer.all
+    @memberships = Membership.all
     #binding pry
   end
 
@@ -48,7 +50,8 @@ class ProjectsController < ApplicationController
         format.html { redirect_to @project, notice: 'Project was successfully updated.' }
         format.json { render :show, status: :ok, location: @project }
       else
-        format.html { render :edit }
+        #format.html { render :edit }
+        format.js { render :index, notice: 'Task comment was successfully destroyed.' }
         format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end
@@ -64,6 +67,22 @@ class ProjectsController < ApplicationController
     end
   end
 
+
+  def  membering
+    @users = User.page(params[:page])
+    @pj_num = params[:id]
+    
+    #参加しているか確認する
+    @member_list = Membership.where(project_id: params[:id])
+    #binding pry
+
+  end
+  
+  def  member_list
+    @project_master =Project.find(params[:id])
+    @member_list = Membership.where(project_id: params[:id])
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project

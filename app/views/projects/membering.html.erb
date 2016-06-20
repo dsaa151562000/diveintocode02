@@ -1,0 +1,10 @@
+
+<% provide(:title, '全てのユーザー') %>
+<h3>メンバー管理</h3>
+<div>
+  <%= render 'user', locals: { user: @users }%>
+</div>
+
+<div>
+<%= paginate @users %>
+</div>

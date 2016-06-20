@@ -1,5 +1,6 @@
 class MembershipsController < ApplicationController
-  before_action :set_membership, only: [:show, :edit, :update, :destroy]
+  before_action :set_membership, only: [:show, :edit, :update]
+  before_action :authenticate_user!
 
   # GET /memberships
   # GET /memberships.json
@@ -25,10 +26,11 @@ class MembershipsController < ApplicationController
   # POST /memberships.json
   def create
     @membership = Membership.new(membership_params)
-
+    @pjnum= params[:project_id]
+    #binding pry
     respond_to do |format|
       if @membership.save
-        format.html { redirect_to @membership, notice: 'Membership was successfully created.' }
+        format.html { redirect_to membering_project_path(@membership.project_id) , notice: 'Membership was successfully created.' }
         format.json { render :show, status: :created, location: @membership }
       else
         format.html { render :new }
@@ -54,17 +56,18 @@ class MembershipsController < ApplicationController
   # DELETE /memberships/1
   # DELETE /memberships/1.json
   def destroy
+     @pj_num = params[:membership]
+     #binding.pry
+    @membership= Membership.find_by(user_id: @pj_num[:user_id])
     @membership.destroy
     respond_to do |format|
-      format.html { redirect_to memberships_url, notice: 'Membership was successfully destroyed.' }
+      format.html { redirect_to  membering_project_path(@membership.project_id) , notice: 'Membership was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
   
   
-  def  membering
-    @users = User.page(params[:page])
-  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

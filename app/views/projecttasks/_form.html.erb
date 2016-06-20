@@ -12,34 +12,34 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :user_id %><br>
     <%= hidden_field_tag ' projecttask[user_id]', current_user.id %>
     <%= hidden_field_tag ' projecttask[project_id]', @pj_num %>
   </div>
 
   <div class="field">
-    <%= f.label :projecttask_title %><br>
+    <%= f.label :タスク名 %><br>
     <%= f.text_field :projecttask_title %>
   </div>
   <div class="field">
-    <%= f.label :projecttask_content %><br>
+    <%= f.label :内容 %><br>
     <%= f.text_area :projecttask_content %>
   </div>
   <div class="field">
-    <%= f.label :projecttask_deadline %><br>
+    <%= f.label :締め切り %><br>
     <%= f.datetime_select :projecttask_deadline %>
   </div>
   <div class="field">
-    <%= f.label :projecttask_charge_id %><br>
-    <%= f.number_field :projecttask_charge_id %>
+    <%= f.label :担当者 %><br>
+    <%= select_tag "projecttask[projecttask_charge_id]", options_for_select(@members_for_options) %>
+
   </div>
   <div class="field">
-    <%= f.label :projecttask_done %><br>
+    <%= f.label :完了 %><br>
     <%= f.check_box :projecttask_done %>
   </div>
   <div class="field">
-    <%= f.label :projecttask_status %><br>
-    <%= f.number_field :projecttask_status %>
+    <%= f.label :ステータス%><br>
+    <%= f.select:projecttask_status,[["未着手","0"],["対応中","1"]] %>
   </div>
   <div class="actions">
     <%= f.submit %>

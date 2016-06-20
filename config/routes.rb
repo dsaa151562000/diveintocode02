@@ -1,13 +1,14 @@
 Rails.application.routes.draw do
  
-  resources :memberships
   resources :projecttasks
   resources :customers
   
   resources :projects do
    resources :projecttasks
+   resources :memberships
    member do
     get :membering;
+    get :member_list;
    end
   end
   

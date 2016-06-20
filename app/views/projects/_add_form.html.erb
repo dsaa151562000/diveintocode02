@@ -1,0 +1,20 @@
+<div id="add_form_<%= user.id %>">
+
+<% unless current_user?(user) %>
+
+<%=form_for(user,url:project_memberships_path(user),method: :post) do|f| %>
+<div>
+<%= hidden_field_tag 'membership[user_id]',user.id %>
+<%= hidden_field_tag 'membership[project_id]', @pj_num %>
+</div>
+<%=f.submit"参加する" , class:"btn btn-large btn-primary"%>
+<% end %>
+
+
+<% end %>
+
+</div>
+
+
+
+

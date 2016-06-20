@@ -21,5 +21,15 @@ module ApplicationHelper
         gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}"
         image_tag(gravatar_url, alt: user.name, class: "gravatar")
     end
+    
+   def member?(other_user)
+    Membership.find_by(user_id: other_user.id)
+    #binding.pry
+
+   end
      
+    def member_project_num?(pj_num)
+     Membership.find_by(project_id: pj_num)
+   end
+
 end
