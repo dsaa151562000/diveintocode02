@@ -30,8 +30,10 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
+    
         <li><a href="#">
           <% if user_signed_in? %> 
+          <li><%=link_to "マイプロジェクト",projects_path %></li>
 <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li> 
 <li><%= link_to "編集", edit_user_registration_path %></li> 
         <li class="dropdown">
@@ -41,7 +43,7 @@
             <li><%=link_to "プログラミングに関する質問",qas_path %></li>
             <li><%=link_to "マイタスク",user_tasks_path(current_user.id) %></li>
             <li><%=link_to "タスクライン",taskline_tasks_path %></li>
-            <li><%=link_to "マイプロジェクト",projects_path %></li>
+            <li class="bg-primary"><%=link_to "マイプロジェクト",projects_path %></li>
             <li><%=link_to "お問い合わせ",contact_new_path %></li>
             <li><%=link_to "お問い合わせ一覧",contact_index_path %></li>
           　<li role="separator" class="divider"></li>
