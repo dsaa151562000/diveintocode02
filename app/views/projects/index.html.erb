@@ -25,11 +25,9 @@
         <td><%= project.deadline.strftime("%Y年%m月%d日") %></td>
         <td><%= project.customer.customer_name %></td>
         <td><%= if project.status ==1 then "対応中" elsif project.status ==0 then "未着手" end %></td>
-            
-          <% if pj_member?(project.id ) || current_user.id == project.user.id %>
+
+          <% if pj_member?(project.id) %>
          <td><%= link_to 'Show', project %> </td>
-         <% else %>
-         <td> </td>
          <% end %>
          
      
@@ -41,19 +39,14 @@
         <td colspan="2"></td>
          <% end %>
         
-        <% if pj_member?(project.id ) || current_user.id == project.user.id %>
         <td><%= link_to 'メンバ一選択', membering_project_path(project) %></td>
         <td><%= link_to 'メンバー一覧', member_list_project_path(project) %></td>
-        <td><%= link_to 'タスク一覧', project_projecttasks_path(project) %></td>
-        <% else %>
-        <td colspan="3"> </td>
-        <% end %>
+        
+        <td><%= link_to 'タスク一覧', project_projecttasks_path(project) %></td></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
 <button type="button" class="btn btn-default">
 <%= link_to '新規プロジェクト作成', new_project_path %>
 </button>
