@@ -26,8 +26,14 @@
         <td><%= project.customer.customer_name %></td>
         <td><%= if project.status ==1 then "対応中" elsif project.status ==0 then "未着手" end %></td>
         <td><%= link_to 'Show', project %></td>
+                
+        <% if current_user.id == project.user.id %>
+          <br><br>
         <td><%= link_to 'Edit', edit_project_path(project) %></td>
         <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% else %>
+        <td colspan="2"></td>
+         <% end %>
         
         <td><%= link_to 'メンバ一選択', membering_project_path(project) %></td>
         <td><%= link_to 'メンバー一覧', member_list_project_path(project) %></td>

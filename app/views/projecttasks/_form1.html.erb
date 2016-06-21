@@ -1,3 +1,4 @@
+<div class="list-group" >
 <%= form_for(@projecttask) do |f| %>
   <% if @projecttask.errors.any? %>
     <div id="error_explanation">
@@ -11,32 +12,32 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="field ">
     <%= hidden_field_tag 'pj_num[project_id]', @pj_num %>
   </div>
 
-  <div class="field">
+  <div class="list-group-item">
     <%= f.label :タスク名 %><br>
     <%= f.text_field :projecttask_title %>
   </div>
-  <div class="field">
+  <div class="list-group-item">
     <%= f.label :内容 %><br>
     <%= f.text_area :projecttask_content %>
   </div>
-  <div class="field">
+  <div class="list-group-item">
     <%= f.label :締め切り %><br>
     <%= f.datetime_select :projecttask_deadline %>
   </div>
-  <div class="field">
+  <div class="list-group-item">
     <%= f.label :担当者 %><br>
     <%= select_tag "projecttask[projecttask_charge_id]", options_for_select(@members_for_options) %>
 
   </div>
-  <div class="field">
+  <div class="list-group-item">
     <%= f.label :完了 %><br>
     <%= f.check_box :projecttask_done %>
   </div>
-  <div class="field">
+  <div class="field  list-group-item">
     <%= f.label :ステータス%><br>
     <%= f.select:projecttask_status,[["未着手","0"],["対応中","1"]] %>
   </div>
@@ -44,3 +45,4 @@
     <%= f.submit %>
   </div>
 <% end %>
+</div>

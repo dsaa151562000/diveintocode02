@@ -1,39 +1,42 @@
 
-
-<div>
+<h4>プロジェクト詳細</h4>
+<div class="list-group">
+  
+<div  class="list-group-item">
   <strong>プロジェクト名:</strong>
   <%= @project.title %>
 </div>
 
-<div>
+<div  class="list-group-item">
   <strong>作成者:</strong>
   <%= @project.user.name %>
 </div>
 
-<div>
+<div class="list-group-item">
   <strong>内容:</strong>
   <%= @project.content %>
 </div>
 
-<div>
+<div  class="list-group-item">
   <strong>締め切り:</strong>
   <%= @project.deadline.strftime("%Y年%m月%d日") %>
 </div>
 
-<div>
+<div  class="list-group-item">
   <strong>顧客:</strong>
   <%= @project.customer.customer_name %>
 </div>
 
-<div>
+<div  class="list-group-item">
   <strong>完了:</strong>
   <%= if @project.done? then "完了" else "未完了" end%>
 </div>
 
-<div>
+<div class="list-group-item">
   <strong>ステータス:</strong>
   <%= if @project.status ==1 then "対応中" elsif @project.status ==0 then "未着手" end %>
 </div>
 
+</div>
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>

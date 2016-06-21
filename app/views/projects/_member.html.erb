@@ -2,7 +2,7 @@
 
 <% @member_list.each do |member| %>
  <% unless current_user?(member) %>
-<div><%= member.id  %><%= member.user.name %> </div>
+<div class="list-group-item"><%= member.id  %><%= member.user.name %> </div>
 <% end %>
 <% end %>
 

@@ -77,9 +77,12 @@ class ProjecttasksController < ApplicationController
   # PATCH/PUT /projecttasks/1.json
   def update
     respond_to do |format|
-      @pj_num = params[:project_id]
+
       if @projecttask.update(projecttask_params)
-        format.html { redirect_to project_projecttasks_path(@pj_num), notice: 'Projecttask was successfully updated.' }
+        @pj_num = params[:pj_num]
+        @pj_num2 = @pj_num[:project_id]
+        
+        format.html { redirect_to project_projecttasks_path(@pj_num2), notice: 'Projecttask was successfully updated.' }
         format.json { render :show, status: :ok, location: @projecttask }
       else
         format.html { render :edit }

@@ -1,4 +1,7 @@
-<div>
+<h4>タスク詳細</h4>
+<div class="list-group">
+
+<div class="list-group-item">
   <strong>担当者:</strong>
     <% @users.each do |user| %>
         <% if user.id == @projecttask.projecttask_charge_id %>
@@ -8,31 +11,33 @@
 </div>
 
 
-<div>
+<div class="list-group-item">
   <strong>タスク名:</strong>
   <%= @projecttask.projecttask_title %>
 </div>
 
-<div>
+<div class="list-group-item">
   <strong>タスク内容:</strong>
   <%= @projecttask.projecttask_content %>
 </div>
 
-<div>
+<div class="list-group-item">
   <strong>締切日:</strong>
  <%= @projecttask.projecttask_deadline.strftime("%Y年%m月%d日") %>
 </div>
 
 
 
-<div>
-  <strong>完了e:</strong>
+<div class="list-group-item">
+  <strong>完了:</strong>
 　<%= if @projecttask.projecttask_done? then "完了" else "未完了" end%>
 </div>
 
-<div>
+<div class="list-group-item">
   <strong>ステータス:</strong>
 　<%= if @projecttask.projecttask_status ==1 then "対応中" elsif @projecttask.projecttask_status ==0 then "未着手" end %>
+</div>
+
 </div>
 
 <%= link_to 'Edit', edit_project_projecttask_path %> |
