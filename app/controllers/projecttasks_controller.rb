@@ -20,6 +20,7 @@ class ProjecttasksController < ApplicationController
   # GET /projecttasks/1
   # GET /projecttasks/1.json
   def show
+    @users = User.all
   end
 
   # GET /projecttasks/new
@@ -38,6 +39,13 @@ class ProjecttasksController < ApplicationController
 
   # GET /projecttasks/1/edit
   def edit
+    @pj_num = params[:project_id]
+    
+     @member_list = Membership.where(project_id: @pj_num)
+    @members_for_options = Hash.new
+    @member_list.each do |member|
+      @members_for_options.store(member.user.name, member.user.id)
+    end
   end
 
   # POST /projecttasks
@@ -45,11 +53,18 @@ class ProjecttasksController < ApplicationController
   def create
    # @projecttask = Projecttask.new(projecttask_params)
     @projecttask= current_user.projecttasks.build(projecttask_params)
+ 
     #binding pry
+    
     respond_to do |format|
       if @projecttask.save
         
-        format.html { redirect_to @projecttask, notice: 'Projecttask was successfully created.' }
+        #@pj_num =pj_params
+         #binding pry
+        @pj_num = params[:pj_num]
+        @pj_num2 = @pj_num[:project_id]
+        format.html {redirect_to project_projecttasks_url(@pj_num2) , notice: 'Projecttask was successfully created.' }
+        
         format.json { render :show, status: :created, location: @projecttask }
       else
         format.html { render :new }
@@ -62,8 +77,9 @@ class ProjecttasksController < ApplicationController
   # PATCH/PUT /projecttasks/1.json
   def update
     respond_to do |format|
+      @pj_num = params[:project_id]
       if @projecttask.update(projecttask_params)
-        format.html { redirect_to @projecttask, notice: 'Projecttask was successfully updated.' }
+        format.html { redirect_to project_projecttasks_path(@pj_num), notice: 'Projecttask was successfully updated.' }
         format.json { render :show, status: :ok, location: @projecttask }
       else
         format.html { render :edit }
@@ -77,7 +93,7 @@ class ProjecttasksController < ApplicationController
   def destroy
     @projecttask.destroy
     respond_to do |format|
-      format.html { redirect_to projecttasks_url, notice: 'Projecttask was successfully destroyed.' }
+      format.html { redirect_to project_projecttasks_url, notice: 'Projecttask was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -92,4 +108,11 @@ class ProjecttasksController < ApplicationController
     def projecttask_params
       params.require(:projecttask).permit(:user_id, :project_id, :projecttask_title, :projecttask_content, :projecttask_deadline, :projecttask_charge_id, :projecttask_done, :projecttask_status)
     end
+    
+   def projecttask_params2
+      params.require(:pj_num).permit(:project_id )
+    end
+    
+    
+    
 end

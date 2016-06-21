@@ -29,12 +29,13 @@
         <% end %>
         <% end %>
         
-        <td><%= projecttask.projecttask_done %></td>
+        <td><%= if projecttask.projecttask_done? then "完了" else "未完了" end%></td>
+        
 
          <td><%= if projecttask.projecttask_status ==1 then "対応中" elsif projecttask.projecttask_status ==0 then "未着手" end %></td>
-        <td><%= link_to 'Show', projecttask %></td>
-        <td><%= link_to 'Edit', edit_projecttask_path(projecttask) %></td>
-        <td><%= link_to 'Destroy', projecttask, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', project_projecttask_path(@pj_num,projecttask) %></td>
+        <td><%= link_to 'Edit', edit_project_projecttask_path(@pj_num,projecttask) %></td>
+        <td><%= link_to 'Destroy', project_projecttask_path(@pj_num,projecttask), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
