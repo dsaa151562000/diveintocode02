@@ -29,11 +29,16 @@
         <td><%= projecttask.projecttask_content %></td>
         <td><%= projecttask.projecttask_deadline.strftime("%Y年%m月%d日") %></td>
         
+       <% if projecttask.projecttask_charge_id == 0  %>
+       <td>admin</td>
+       <% else %>
         <% @users.each do |user| %>
-        <% if user.id == projecttask.projecttask_charge_id %>
-        <td><%= user.name %></td>
+           <% if user.id == projecttask.projecttask_charge_id %>
+               <td><%= user.name %></td>
+           <% end %>
         <% end %>
-        <% end %>
+      <% end %>
+
         
         <td><%= if projecttask.projecttask_done? then "完了" else "未完了" end%></td>
         

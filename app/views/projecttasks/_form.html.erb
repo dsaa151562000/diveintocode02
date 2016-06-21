@@ -40,7 +40,15 @@
   </div>
   <div class="list-group-item">
     <%= f.label :担当者 %><br>
-    <%= select_tag "projecttask[projecttask_charge_id]", options_for_select(@members_for_options) %>
+
+    
+    <% if @members_for_options.empty?%>
+    <select name="projecttask[projecttask_charge_id]" id="projecttask_projecttask_charge_id">
+      <option value="0">admin</option>
+      </select>
+      <% else %>
+      <%= select_tag "projecttask[projecttask_charge_id]", options_for_select(@members_for_options) %>
+    <% end %>
 
   </div>
   <div class="list-group-item">

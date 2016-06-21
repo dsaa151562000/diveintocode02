@@ -3,6 +3,7 @@
 
 <div class="list-group-item">
   <strong>担当者:</strong>
+  
     <% @users.each do |user| %>
         <% if user.id == @projecttask.projecttask_charge_id %>
         <td><%= user.name %></td>
