@@ -26,11 +26,9 @@
         <td><%= project.customer.customer_name %></td>
         <td><%= if project.status ==1 then "対応中" elsif project.status ==0 then "未着手" end %></td>
 
-          <% if pj_member?(project.id) %>
+          <% if pj_member?(project.id) || current_user.id == project.user.id %>
+          
          <td><%= link_to 'Show', project %> </td>
-         <% end %>
-         
-     
         <% if current_user.id == project.user.id %>
           <br><br>
         <td><%= link_to 'Edit', edit_project_path(project) %></td>
@@ -43,6 +41,11 @@
         <td><%= link_to 'メンバー一覧', member_list_project_path(project) %></td>
         
         <td><%= link_to 'タスク一覧', project_projecttasks_path(project) %></td></td>
+        
+          <% else %>
+         <td colspan="6"></td>
+         <% end %>
+        
       </tr>
     <% end %>
   </tbody>
