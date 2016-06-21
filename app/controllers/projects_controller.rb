@@ -6,6 +6,8 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
     @projects = Project.all
+    
+
   end
 
   # GET /projects/1
@@ -80,7 +82,10 @@ class ProjectsController < ApplicationController
   
   def  member_list
     @project_master =Project.find(params[:id])
+    
+    #参加しているか確認する
     @member_list = Membership.where(project_id: params[:id])
+
   end
   
   private

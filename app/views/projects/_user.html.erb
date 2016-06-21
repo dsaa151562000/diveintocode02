@@ -1,15 +1,18 @@
-<div class="boxb">
 
 <% @users.each do |user| %>
  <% unless current_user?(user) %>
-<div><%= user.id  %><%=link_to user.name , user %> </div>
-
-   <% if member?(user) && member_project_num?(@pj_num) %>
+ <div class="boxb">
+<div><%= user.id  %>:<%=link_to user.name , user %> </div>
+<div>
+   <% if  member_project_num?( @pj_num , user.id ) %>
        <%= render partial:'dele_form',locals:{user: user} %>
     <% else %>   
        <%= render partial:'add_form',locals:{user: user} %>
    <% end %>
+   </div>
+</div>
 
 <% end %>
 <% end %>
-</div>
+
+
