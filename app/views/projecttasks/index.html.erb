@@ -4,6 +4,7 @@
 <table class="table table-bordered">
   <thead>
     <tr>
+       <th>プロジェクトID</th>
       <th>タスク名</th>
       <th>タスク作成者</th>
       <th>タスク内容</th>
@@ -15,9 +16,16 @@
     </tr>
   </thead>
 
+
   <tbody>
+
+
     <% @projecttasks.each do |projecttask| %>
+    <% num = @pj_num.to_i %>
+    <% if num == projecttask.project_id %>
+
       <tr>
+        <td><%= projecttask.project_id %></td>
        <td><%= projecttask.projecttask_title %></td>
         <td><%= projecttask.user.name %></td>
         <td><%= projecttask.projecttask_content %></td>
@@ -44,6 +52,7 @@
         <% end %>
         
       </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>

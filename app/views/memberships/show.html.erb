@@ -1,14 +1,14 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>User:</strong>
+<div>
+  <strong>顧客:</strong>
   <%= @membership.user %>
-</p>
+</div>
 
-<p>
+<div>
   <strong>Project:</strong>
   <%= @membership.project %>
-</p>
+</div>
 
 <%= link_to 'Edit', edit_membership_path(@membership) %> |
 <%= link_to 'Back', memberships_path %>

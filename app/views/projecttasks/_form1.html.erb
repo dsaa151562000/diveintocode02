@@ -12,8 +12,13 @@
     </div>
   <% end %>
 
-  <div class="field ">
-    <%= hidden_field_tag 'pj_num[project_id]', @pj_num %>
+
+    <%= hidden_field_tag ' projecttask[user_id]', current_user.id %>
+
+    
+    <% #hidden_field_tag 'pj_num[project_id2]', @pj_num %>
+  <div class="field">
+     <%= hidden_field_tag ' projecttask[project_id]', @pj_num %>
   </div>
 
   <div class="list-group-item">

@@ -1,7 +1,8 @@
-<div>
-  <strong>Customer name:</strong>
+<div class="list-group">
+<div  class="list-group-item">
+  <strong>顧客名:</strong>
   <%= @customer.customer_name %>
 </div>
-
+</div>
 <%= link_to 'Edit', edit_customer_path(@customer) %> |
 <%= link_to 'Back', customers_path %>

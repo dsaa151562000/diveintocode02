@@ -26,6 +26,7 @@ class ProjecttasksController < ApplicationController
   # GET /projecttasks/new
   def new
     @projecttask = Projecttask.new
+
     #Parameters: {"project_id"=>"6"}
     @pj_num = params[:project_id]
     @member_list = Membership.where(project_id: @pj_num)
@@ -62,7 +63,8 @@ class ProjecttasksController < ApplicationController
         #@pj_num =pj_params
          #binding pry
         @pj_num = params[:pj_num]
-        @pj_num2 = @pj_num[:project_id]
+        @pj_num2 = @pj_num[:project_id2]
+        #binding pry
         format.html {redirect_to project_projecttasks_url(@pj_num2) , notice: 'Projecttask was successfully created.' }
         
         format.json { render :show, status: :created, location: @projecttask }
@@ -80,7 +82,7 @@ class ProjecttasksController < ApplicationController
 
       if @projecttask.update(projecttask_params)
         @pj_num = params[:pj_num]
-        @pj_num2 = @pj_num[:project_id]
+        @pj_num2 = @pj_num[:project_id2]
         
         format.html { redirect_to project_projecttasks_path(@pj_num2), notice: 'Projecttask was successfully updated.' }
         format.json { render :show, status: :ok, location: @projecttask }
@@ -111,11 +113,6 @@ class ProjecttasksController < ApplicationController
     def projecttask_params
       params.require(:projecttask).permit(:user_id, :project_id, :projecttask_title, :projecttask_content, :projecttask_deadline, :projecttask_charge_id, :projecttask_done, :projecttask_status)
     end
-    
-   def projecttask_params2
-      params.require(:pj_num).permit(:project_id )
-    end
-    
     
     
 end
