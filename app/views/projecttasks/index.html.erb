@@ -4,7 +4,6 @@
 <table class="table table-bordered">
   <thead>
     <tr>
-       <th>プロジェクトID</th>
       <th>タスク名</th>
       <th>タスク作成者</th>
       <th>タスク内容</th>
@@ -25,7 +24,6 @@
     <% if num == projecttask.project_id %>
 
       <tr>
-        <td><%= projecttask.project_id %></td>
        <td><%= projecttask.projecttask_title %></td>
         <td><%= projecttask.user.name %></td>
         <td><%= projecttask.projecttask_content %></td>
