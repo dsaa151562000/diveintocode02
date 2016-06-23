@@ -28,7 +28,7 @@
 
   <div class="list-group-item">
     <%= f.label :タスク名 %><br>
-    <%= f.text_field :projecttask_title %>
+    <%= f.text_field :projecttask_title :required => true %>
   </div>
   <div class="list-group-item">
     <%= f.label :内容 %><br>
@@ -36,7 +36,12 @@
   </div>
   <div class="list-group-item">
     <%= f.label :締め切り %><br>
-    <%= f.datetime_select :projecttask_deadline %>
+    <%= f.date_select(
+         :projecttask_deadline,
+          start_year: Time.now.year,
+          end_year:   Time.now.year + 18,
+          default:   Time.now) %>
+    
   </div>
   <div class="list-group-item">
     <%= f.label :担当者 %><br>
