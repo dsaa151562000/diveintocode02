@@ -65,10 +65,15 @@ class ProjecttasksController < ApplicationController
         @pj_num = params[:pj_num]
         @pj_num2 = @pj_num[:project_id2]
         #binding pry
-        format.html {redirect_to project_projecttasks_url(@pj_num2) , notice: 'Projecttask was successfully created.' }
+        format.html {redirect_to project_projecttasks_url(@pj_num2) , notice: '新規タスクを登録しました' }
         
         format.json { render :show, status: :created, location: @projecttask }
       else
+      @member_list = Membership.where(project_id: @pj_num)
+      @members_for_options = Hash.new
+      @member_list.each do |member|
+      @members_for_options.store(member.user.name, member.user.id)
+    end
         format.html { render :new }
         format.json { render json: @projecttask.errors, status: :unprocessable_entity }
       end

@@ -1,13 +1,12 @@
 <div id="dele_form_<%= user.id %>">
-
 <% unless current_user?(user) %>
-
 <%=form_for(user,url:project_membership_path(@pj_num, user),method: :delete) do|f| %>
 <div>
 <%= hidden_field_tag 'membership[user_id]',user.id %>
 <%= hidden_field_tag 'membership[project_id]', @pj_num %>
 </div>
-<%=f.submit"削除する" , class:"btn btn-default"%>
-<% end %>
+<%=f.submit"メンバーから削除" , class:"btn btn-warning"%>
 
 <% end %>
+<% end %>
+</div>

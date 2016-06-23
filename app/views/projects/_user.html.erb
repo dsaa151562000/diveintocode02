@@ -2,7 +2,7 @@
 <% @users.each do |user| %>
  <% unless current_user?(user) %>
  <div class="boxb">
-<div><%= user.id  %>:<%=link_to user.name , user %> </div>
+<div><%=link_to user.name , user %>を </div>
 <div>
    <% if  member_project_num?( @pj_num , user.id ) %>
        <%= render partial:'dele_form',locals:{user: user} %>

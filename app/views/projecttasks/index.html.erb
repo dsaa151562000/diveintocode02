@@ -44,12 +44,12 @@
         
 
          <td><%= if projecttask.projecttask_status ==1 then "対応中" elsif projecttask.projecttask_status ==0 then "未着手" end %></td>
-        <td><%= link_to 'Show', project_projecttask_path(@pj_num,projecttask) %></td>
+        <td><%= link_to 'タスク詳細', project_projecttask_path(@pj_num,projecttask) %></td>
         
          <% if current_user.id == projecttask.user.id %>
           <br><br>
-        <td><%= link_to 'Edit', edit_project_projecttask_path(@pj_num,projecttask) %></td>
-        <td><%= link_to 'Destroy', project_projecttask_path(@pj_num,projecttask), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to '編集', edit_project_projecttask_path(@pj_num,projecttask) %></td>
+        <td><%= link_to '削除', project_projecttask_path(@pj_num,projecttask), method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% else %>
         <td colspan="2"></td>
         <% end %>

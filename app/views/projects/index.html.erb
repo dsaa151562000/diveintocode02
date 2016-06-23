@@ -28,10 +28,10 @@
 
           <% if pj_member?(project.id) || current_user.id == project.user.id %>
           
-         <td><%= link_to 'Show', project %> </td>
+         <td><%= link_to 'プロジェクト詳細', project %> </td>
         <% if current_user.id == project.user.id %>
-        <td><%= link_to 'Edit', edit_project_path(project) %></td>
-        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to '編集', edit_project_path(project) %></td>
+        <td><%= link_to '削除', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% else %>
         <td colspan="2"></td>
          <% end %>
