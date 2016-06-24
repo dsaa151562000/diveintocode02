@@ -1,18 +1,15 @@
 <div class="list-group" >
 <%= form_for(@projecttask) do |f| %>
   <% if @projecttask.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@projecttask.errors.count, "error") %> prohibited this projecttask from being saved:</h2>
 
+      <h4><%= @projecttask.errors.count %> 個のエラー</h4>
       <ul >
       <% @projecttask.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
-    </div>
+
   <% end %>
-
-
 
   <div class="list-group-item">
     <%= f.label :タスク名 %><br>
@@ -65,7 +62,8 @@
   
    <div class="list-group-item">
     <% #f.text_field :project_id %>
-    <input type="hidden" name="projecttask[project_id]" id="projecttask_project_id" value="<%=@pj_num %>">
     
-     <%= hidden_field_tag 'pj_num[project_id2]', @pj_num %>
+    
+     <%= hidden_field_tag 'pj_num[project_id2]', session[:@pj_num] %>
+
   </div>

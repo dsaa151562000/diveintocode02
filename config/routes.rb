@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   end
   resources :tasks
 
-
+resources :qacomments
   resources :qas do
    resources :qacomments
   end

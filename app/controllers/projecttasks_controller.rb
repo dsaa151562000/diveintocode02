@@ -29,7 +29,10 @@ class ProjecttasksController < ApplicationController
 
     #Parameters: {"project_id"=>"6"}
     @pj_num = params[:project_id]
-    @member_list = Membership.where(project_id: @pj_num)
+    session[:@pj_num] = @pj_num
+    #binding pry
+ 
+    @member_list = Membership.where(project_id: session[:@pj_num])
     @members_for_options = Hash.new
     @member_list.each do |member|
       @members_for_options.store(member.user.name, member.user.id)
@@ -56,20 +59,26 @@ class ProjecttasksController < ApplicationController
  
     #binding pry
     
+    
     respond_to do |format|
       if @projecttask.save
         
+        
         #@pj_num =pj_params
          #binding pry
-        @pj_num = params[:pj_num]
-        @pj_num2 = @pj_num[:project_id2]
+      
+        @pj_num2 = session[:@pj_num]
         #binding pry
         format.html {redirect_to project_projecttasks_url(@pj_num2) , notice: '新規タスクを作成しました' }
         
         format.json { render :show, status: :created, location: project_projecttasks_path }
       else
-       # format.html { render :template project_projecttasks_path:new }
-        format.html { render "projects/#{@pj_num2}/projecttasks/new" }
+        #@pj_num = params[:pj_num]
+        #@pj_num2 = @pj_num[:project_id2]
+        @pj_num = session[:@pj_num] 
+       #binding pry
+       format.html{ render :new }
+       # format.html { render "projects/#{@pj_num2}/projecttasks/new" }
         
         
        # format.json { render json: @projecttask.errors, status: :unprocessable_entity }

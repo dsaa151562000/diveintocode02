@@ -8,7 +8,7 @@ ja:
       before: "は %{restriction} より前を指定してください。"
       on_or_before: "は %{restriction} 以前を指定してください。"
       after: "は %{restriction} より後を指定してください。"
-      on_or_after: "は %{restriction} 以降を指定してください。"
+      on_or_after: "締め切りは 本日以降を指定してください。"
   validates_timeliness:
     error_value_formats:
       date: '%Y-%m-%d'
