@@ -1,6 +1,6 @@
 
 <% @users.each do |user| %>
- <% unless current_user?(user) %>
+
  <div class="boxb">
 <div><%=link_to user.name , user %>を </div>
 <div>
@@ -12,7 +12,7 @@
    </div>
 </div>
 
-<% end %>
+
 <% end %>
 
 

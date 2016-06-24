@@ -1,5 +1,5 @@
 <div id="add_form_<%= user.id %>">
-<% unless current_user?(user) %>
+
 <%=form_for(user,url:project_memberships_path(user),method: :post) do|f| %>
 <div>
 <%= hidden_field_tag 'membership[user_id]',user.id %>
@@ -7,7 +7,7 @@
 </div>
 <%=f.submit"メンバーに追加" , class:"btn btn-large btn-primary"%>
 <% end %>
-<% end %>
+
 </div>
 
 

@@ -1,36 +1,22 @@
 <div class="list-group" >
 <%= form_for(@projecttask) do |f| %>
   <% if @projecttask.errors.any? %>
-
-      <h4><%= @projecttask.errors.count %> 個のエラー</h4>
+    <div id="error_explanation">
+      <h2><%= pluralize(@projecttask.errors.count, "error") %> prohibited this projecttask from being saved:</h2>
 
       <ul >
       <% @projecttask.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
-
+    </div>
   <% end %>
 
-  <div class="field">
-    <%= hidden_field_tag ' projecttask[user_id]', current_user.id %>
 
-    
-  </div>
-  
-  
-  
-   <div class="list-group-item">
-    <%= f.label :プロジェクト名 %><br>
-    <% #f.text_field :project_id %>
-    <input type="hidden" name="projecttask[project_id]" id="projecttask_project_id" value="<%=@pj_num %>">
-    
-     <%= hidden_field_tag 'pj_num[project_id2]', @pj_num %>
-  </div>
 
   <div class="list-group-item">
     <%= f.label :タスク名 %><br>
-    <%= f.text_field :projecttask_title  %>
+    <%= f.text_field :projecttask_title %>
   </div>
   <div class="list-group-item">
     <%= f.label :内容 %><br>
@@ -48,8 +34,7 @@
   <div class="list-group-item">
     <%= f.label :担当者 %><br>
 
-    
-    <% if @members_for_options.empty?%>
+    <% if @members_for_options.blank? %>
     <select name="projecttask[projecttask_charge_id]" id="projecttask_projecttask_charge_id">
       <option value="0">admin</option>
       </select>
@@ -72,3 +57,15 @@
 <% end %>
 
 </div>
+  <div class="field">
+    <%= hidden_field_tag ' projecttask[user_id]', current_user.id %>
+
+    
+  </div>
+  
+   <div class="list-group-item">
+    <% #f.text_field :project_id %>
+    <input type="hidden" name="projecttask[project_id]" id="projecttask_project_id" value="<%=@pj_num %>">
+    
+     <%= hidden_field_tag 'pj_num[project_id2]', @pj_num %>
+  </div>

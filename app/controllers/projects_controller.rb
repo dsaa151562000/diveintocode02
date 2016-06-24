@@ -99,4 +99,9 @@ class ProjectsController < ApplicationController
     def project_params
       params.require(:project).permit(:user_id, :title, :content, :deadline, :customer_id, :done, :status)
     end
+    
+     # Never trust parameters from the scary internet, only allow the white list through.
+    def membership_params
+      params.require(:membership).permit(:user_id, :project_id)
+    end
 end

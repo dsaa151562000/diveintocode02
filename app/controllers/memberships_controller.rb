@@ -31,7 +31,7 @@ class MembershipsController < ApplicationController
     #binding pry
     respond_to do |format|
       if @membership.save
-        format.html { redirect_to membering_project_path(@membership.project_id) , notice: 'Membership was successfully created.' }
+        format.html { redirect_to membering_project_path(@membership.project_id) , notice: 'メンバーに追加しました' }
         format.json { render :show, status: :created, location: @membership }
       else
         format.html { render :new }
@@ -45,7 +45,7 @@ class MembershipsController < ApplicationController
   def update
     respond_to do |format|
       if @membership.update(membership_params)
-        format.html { redirect_to @membership, notice: 'Membership was successfully updated.' }
+        format.html { redirect_to @membership, notice: '更新しました' }
         format.json { render :show, status: :ok, location: @membership }
       else
         format.html { render :edit }
@@ -62,7 +62,7 @@ class MembershipsController < ApplicationController
     @membership= Membership.find_by(user_id: @pj_num[:user_id])
     @membership.destroy
     respond_to do |format|
-      format.html { redirect_to  membering_project_path(@membership.project_id) , notice: 'Membership was successfully destroyed.' }
+      format.html { redirect_to  membering_project_path(@membership.project_id) , notice: 'メンバーから削除しました' }
       format.json { head :no_content }
     end
   end

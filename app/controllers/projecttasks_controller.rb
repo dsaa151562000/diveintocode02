@@ -30,7 +30,6 @@ class ProjecttasksController < ApplicationController
     #Parameters: {"project_id"=>"6"}
     @pj_num = params[:project_id]
     @member_list = Membership.where(project_id: @pj_num)
-    
     @members_for_options = Hash.new
     @member_list.each do |member|
       @members_for_options.store(member.user.name, member.user.id)
@@ -65,17 +64,15 @@ class ProjecttasksController < ApplicationController
         @pj_num = params[:pj_num]
         @pj_num2 = @pj_num[:project_id2]
         #binding pry
-        format.html {redirect_to project_projecttasks_url(@pj_num2) , notice: '新規タスクを登録しました' }
+        format.html {redirect_to project_projecttasks_url(@pj_num2) , notice: '新規タスクを作成しました' }
         
-        format.json { render :show, status: :created, location: @projecttask }
+        format.json { render :show, status: :created, location: project_projecttasks_path }
       else
-      @member_list = Membership.where(project_id: @pj_num)
-      @members_for_options = Hash.new
-      @member_list.each do |member|
-      @members_for_options.store(member.user.name, member.user.id)
-    end
-        format.html { render :new }
-        format.json { render json: @projecttask.errors, status: :unprocessable_entity }
+       # format.html { render :template project_projecttasks_path:new }
+        format.html { render "projects/#{@pj_num2}/projecttasks/new" }
+        
+        
+       # format.json { render json: @projecttask.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -89,7 +86,7 @@ class ProjecttasksController < ApplicationController
         @pj_num = params[:pj_num]
         @pj_num2 = @pj_num[:project_id2]
         
-        format.html { redirect_to project_projecttasks_path(@pj_num2), notice: 'Projecttask was successfully updated.' }
+        format.html { redirect_to project_projecttasks_path(@pj_num2), notice: '更新しました' }
         format.json { render :show, status: :ok, location: @projecttask }
       else
         format.html { render :edit }
@@ -103,7 +100,7 @@ class ProjecttasksController < ApplicationController
   def destroy
     @projecttask.destroy
     respond_to do |format|
-      format.html { redirect_to project_projecttasks_url, notice: 'Projecttask was successfully destroyed.' }
+      format.html { redirect_to project_projecttasks_url, notice: 'タスクを削除しました' }
       format.json { head :no_content }
     end
   end
