@@ -53,8 +53,8 @@ class ProjectsController < ApplicationController
         format.html { redirect_to @project, notice: 'プロジェクトを更新しました。' }
         format.json { render :show, status: :ok, location: @project }
       else
-        #format.html { render :edit }
-        format.js { render :index, notice: 'プロジェクトを削除しました。' }
+        format.html { render :edit }
+        #format.js { render :index, notice: 'プロジェクトを削除しました。' }
         format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end
@@ -65,7 +65,7 @@ class ProjectsController < ApplicationController
   def destroy
     @project.destroy
     respond_to do |format|
-      format.html { redirect_to projects_url, notice: '新規プロジェクトを作成しました' }
+      format.html { redirect_to projects_url, notice: '新規プロジェクトを削除しました。' }
       format.json { head :no_content }
     end
   end
