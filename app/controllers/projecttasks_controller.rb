@@ -6,11 +6,12 @@ class ProjecttasksController < ApplicationController
   # GET /projecttasks.json
   def index
     @projecttasks = Projecttask.all
+    #binding.pry
     @project = Project.find(params[:project_id])
     
     @users = User.all
     
-    @pj_num = params[:project_id]
+    @pj_num = params[:project_id]#
     @member_list = Membership.where(project_id: @pj_num)
     #binding.pry
     
@@ -61,7 +62,6 @@ class ProjecttasksController < ApplicationController
     
     respond_to do |format|
       if @projecttask.save
-        
         
         #@pj_num =pj_params
          #binding pry
