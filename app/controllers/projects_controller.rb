@@ -53,6 +53,7 @@ class ProjectsController < ApplicationController
         format.html { redirect_to @project, notice: 'プロジェクトを更新しました。' }
         format.json { render :show, status: :ok, location: @project }
       else
+         @customers = Customer.all
         format.html { render :edit }
         #format.js { render :index, notice: 'プロジェクトを削除しました。' }
         format.json { render json: @project.errors, status: :unprocessable_entity }
