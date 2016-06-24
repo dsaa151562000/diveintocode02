@@ -32,6 +32,7 @@ class MembershipsController < ApplicationController
     respond_to do |format|
       if @membership.save
         format.html { redirect_to membering_project_path(@membership.project_id) , notice: 'メンバーに追加しました' }
+       # format.js  { redirect_to membering_project_path(@membership.project_id)  }
         format.json { render :show, status: :created, location: @membership }
       else
         format.html { render :new }

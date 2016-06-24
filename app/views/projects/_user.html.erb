@@ -3,7 +3,7 @@
 
  <div class="boxb">
 <div><%=link_to user.name , user %>を </div>
-<div>
+<div class="area">
    <% if  member_project_num?( @pj_num , user.id ) %>
        <%= render partial:'dele_form',locals:{user: user} %>
     <% else %>   

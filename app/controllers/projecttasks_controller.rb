@@ -42,9 +42,10 @@ class ProjecttasksController < ApplicationController
 
   # GET /projecttasks/1/edit
   def edit
-    @pj_num = params[:project_id]
-    
-     @member_list = Membership.where(project_id: @pj_num)
+    #@pj_num = params[:project_id]
+    session[:@pj_num3] = params[:project_id]
+   
+     @member_list = Membership.where(project_id: session[:@pj_num3] )
     @members_for_options = Hash.new
     @member_list.each do |member|
       @members_for_options.store(member.user.name, member.user.id)
@@ -56,9 +57,7 @@ class ProjecttasksController < ApplicationController
   def create
    # @projecttask = Projecttask.new(projecttask_params)
     @projecttask= current_user.projecttasks.build(projecttask_params)
- 
     #binding pry
-    
     
     respond_to do |format|
       if @projecttask.save
@@ -92,10 +91,13 @@ class ProjecttasksController < ApplicationController
     respond_to do |format|
 
       if @projecttask.update(projecttask_params)
-        @pj_num = params[:pj_num]
-        @pj_num2 = @pj_num[:project_id2]
         
-        format.html { redirect_to project_projecttasks_path(@pj_num2), notice: '更新しました' }
+        @pj_num = session[:@pj_num3] 
+        #binding.pry
+        
+        #@pj_num2 = @pj_num[:project_id2]
+        
+        format.html { redirect_to  project_projecttasks_url(@pj_num) , notice: '更新しました' }
         format.json { render :show, status: :ok, location: @projecttask }
       else
         format.html { render :edit }
