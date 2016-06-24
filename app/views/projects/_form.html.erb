@@ -28,7 +28,11 @@
   </div>
   <div class="list-group-item">
     <%= f.label :締め切り %><br>
-    <%= f.datetime_select :deadline %>
+        <%= f.date_select(
+         :deadline,
+          start_year: Time.now.year,
+          end_year:   Time.now.year + 18,
+          default:   Time.now) %>
   </div>
   <div class="list-group-item">
     <%= f.label :顧客 %><br>
