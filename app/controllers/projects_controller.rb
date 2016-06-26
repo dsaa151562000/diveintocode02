@@ -74,12 +74,13 @@ class ProjectsController < ApplicationController
 
   def  membering
     @users = User.page(params[:page])
-    @pj_num = params[:id]
+    session[:@pj_num]= params[:id]
+    @pj_num = session[:@pj_num]
     
+    #binding pry
     #参加しているか確認する
     @member_list = Membership.where(project_id: params[:id])
     #binding pry
-
   end
   
   def  member_list

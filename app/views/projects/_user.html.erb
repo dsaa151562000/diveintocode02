@@ -1,17 +1,17 @@
-
 <% @users.each do |user| %>
 
  <div class="boxb">
-<div><%=link_to user.name , user %>を </div>
-<div class="area">
-   <% if  member_project_num?( @pj_num , user.id ) %>
-       <%= render partial:'dele_form',locals:{user: user} %>
-    <% else %>   
-       <%= render partial:'add_form',locals:{user: user} %>
-   <% end %>
-   </div>
-</div>
+ <div><%=link_to user.name , user %>を </div>
 
+  <div id="add_del_form_<%= user.id %>">
+    <% if  member_project_num?( @pj_num , user.id ) %>
+        <%= render partial:'dele_form',locals:{user: user} %>
+     <% else %>   
+        <%= render partial:'add_form',locals:{user: user} %>
+    <% end %>
+  </div> 
+  
+ </div>
 
 <% end %>
 

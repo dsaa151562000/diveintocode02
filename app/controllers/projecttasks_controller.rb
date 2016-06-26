@@ -34,10 +34,12 @@ class ProjecttasksController < ApplicationController
     #binding pry
  
     @member_list = Membership.where(project_id: session[:@pj_num])
+    
     @members_for_options = Hash.new
     @member_list.each do |member|
       @members_for_options.store(member.user.name, member.user.id)
     end
+    
     #binding pry
   end
 

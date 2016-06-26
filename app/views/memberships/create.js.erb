@@ -1,0 +1,3 @@
+$("#add_del_form_"+"<%= @user.id %>").html('<%= escape_javascript(render partial:'projects/dele_form',locals:{user: @user , pj_num: @pjnum} ) %>')
+
+
