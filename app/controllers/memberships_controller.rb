@@ -53,17 +53,17 @@ class MembershipsController < ApplicationController
 
   # PATCH/PUT /memberships/1
   # PATCH/PUT /memberships/1.json
-  def update
-    respond_to do |format|
-      if @membership.update(membership_params)
-        format.html { redirect_to @membership, notice: '更新しました' }
-        format.json { render :show, status: :ok, location: @membership }
-      else
-        format.html { render :edit }
-        format.json { render json: @membership.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  # def update
+  #   respond_to do |format|
+  #     if @membership.update(membership_params)
+  #       format.html { redirect_to @membership, notice: '更新しました' }
+  #       format.json { render :show, status: :ok, location: @membership }
+  #     else
+  #       format.html { render :edit }
+  #       format.json { render json: @membership.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   # DELETE /memberships/1
   # DELETE /memberships/1.json
@@ -71,11 +71,12 @@ class MembershipsController < ApplicationController
      @pj_num = params[:membership]
      #binding.pry
     @membership= Membership.find_by(user_id: @pj_num[:user_id])
+    @user = User.find(params[:membership][:user_id])
     @membership.destroy
     respond_to do |format|
-      #format.js
-      format.html { redirect_to  membering_project_path(@membership.project_id) , notice: 'メンバーから削除しました' }
-      format.json { head :no_content }
+      #format.html { redirect_to  membering_project_path(@membership.project_id) , notice: 'メンバーから削除しました' }
+      #format.json { head :no_content }
+      format.js
     end
   end
   
