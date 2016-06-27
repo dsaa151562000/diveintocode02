@@ -40,7 +40,15 @@ resources :qacomments
     get :following, :followers;    
    end
    
-  end
+   resources :submit_requests , shallow: true do
+    get 'approve'
+    get 'unapprove'
+    get 'reject'
+     collection do
+      get 'inbox'
+     end
+    end
+   end
   
   namespace :taskline do
    resources :tasks do
