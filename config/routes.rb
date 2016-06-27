@@ -39,6 +39,7 @@ resources :qacomments
    member do
     get :following, :followers;    
    end
+   
   end
   
   namespace :taskline do
