@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
  
-  resources :projecttasks
+ resources :projecttasks
   
   resources :customers
   
