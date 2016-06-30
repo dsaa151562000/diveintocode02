@@ -1,2 +1,12 @@
-<h1>SubmitRequests#new</h1>
-<p>Find me in app/views/submit_requests/new.html.erb</p>
+<div>
+ <h1>依頼する内容</h1>
+    <div>
+    <% if @task.present? %>
+         <%= render'form' %>
+    <% else %>
+         依頼できるものがありません
+    <% end %>
+    </div>
+ </div>
+ 
+ <%= link_to '戻る',user_submit_requests_path(@submit_request.user_id) %>

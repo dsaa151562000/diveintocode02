@@ -82,6 +82,7 @@ class SubmitRequestsController < ApplicationController
     @submit_reques.update(status: 2)
     #依頼にひもずくタスクのステータスを承認にする
     @submit_reques.task.update(status: 2)
+    #現在依頼した本人が担当者になっている一覧を表示
     @Submit_Requests = SubmitRequest.where(charge_id: current_user.id).order("updated_at DESC")
     
     respond_to do |fromat|

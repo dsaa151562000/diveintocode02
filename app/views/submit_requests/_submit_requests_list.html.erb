@@ -1,0 +1,68 @@
+
+<div id="submit_requests_<%= current_user.id %>" >
+<%= render partial: 'submit_requests_list', locals: { submit_requests: @submit_requests} %>
+</div>
+
+<% if submit_requests.present? %>
+ <p><%= submit_requests.count %>件</p>
+ <div>
+  <table>
+    <th>ステータス</th>
+　　<th>タスク・タイトル</th>
+　　<th>依頼者</th>
+　　<th>担当者</th>
+　　<th>依頼日</th>
+　　<th>タスク・ステータス</th>
+　　<tbody>
+    <% submit_requests.each do |sr| %>
+     <div class="sr_tbl">
+      <tr>
+       <!--ステータス -->
+       <% if sr.status == 1 %>
+        <td>未承認</td>
+       <% elsif sr.status == 2 %>
+         <td>了承済</td>
+       <% elsif sr.status == 8 %>
+        <td>取り消し済</td>
+       <% elsif sr.status == 9 %>
+         <td>却下</td> 
+       <% end %>
+       
+       <!--タスク・タイトル -->
+       <td><%= link_to sr.task.title , task_path(sr.task) %></td>
+       
+       <!--依頼者 -->
+       <td>sr.task.user.name</td>
+       
+       <!--担当者 -->      
+       <% if sr.charger.name == current_user.id %>
+       <td>(自分)</td>
+       <% else %>
+       <td><%= sr.charger.name %></td>
+       <% end %>
+       
+       <!--依頼日 -->
+       <td><%= sr.created_at.strftime("%Y年 %m月 %d日")%></td>
+ 
+       <!--タスク・ステータ日 -->
+        <% if sr.task.done == true %>
+       <td>完了</td>
+       <% else %>
+       <td>未完了</td>
+       <% end %>
+       
+       <td><%= link_to '詳細',submit_request_path(sr)%></td>
+       <td><%= link_to '編集',edit_submit_request_path(sr)%></td>
+       <td><%= link_to '承認',submit_request_approve_path(sr)%></td>
+       <td><%= link_to '却下',submit_request_unapprove_path(sr)%></td>
+       
+      </tr>
+     </div>
+    <% end %>
+　　</tbody>
+   </table>
+   </div>
+ <%end %>
+ 
+ <%= link_to '新規依頼',new_user_submit_request_path %>
+ <%= link_to '依頼されている一覧',inbox_user_submit_requests_path %>
