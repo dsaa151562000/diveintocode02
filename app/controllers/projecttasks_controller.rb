@@ -48,7 +48,7 @@ class ProjecttasksController < ApplicationController
     #@pj_num = params[:project_id]
     session[:@pj_num3] = params[:project_id]
    
-     @member_list = Membership.where(project_id: session[:@pj_num3] )
+    @member_list = Membership.where(project_id: session[:@pj_num3] )
     @members_for_options = Hash.new
     @member_list.each do |member|
       @members_for_options.store(member.user.name, member.user.id)

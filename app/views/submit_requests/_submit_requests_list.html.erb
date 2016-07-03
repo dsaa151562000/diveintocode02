@@ -1,12 +1,8 @@
 
-<div id="submit_requests_<%= current_user.id %>" >
-<%= render partial: 'submit_requests_list', locals: { submit_requests: @submit_requests} %>
-</div>
-
 <% if submit_requests.present? %>
- <p><%= submit_requests.count %>件</p>
- <div>
-  <table>
+ <div><%= submit_requests.count %>件</div>
+
+  <table class="table table-bordered">
     <th>ステータス</th>
 　　<th>タスク・タイトル</th>
 　　<th>依頼者</th>
@@ -15,7 +11,6 @@
 　　<th>タスク・ステータス</th>
 　　<tbody>
     <% submit_requests.each do |sr| %>
-     <div class="sr_tbl">
       <tr>
        <!--ステータス -->
        <% if sr.status == 1 %>
@@ -32,7 +27,7 @@
        <td><%= link_to sr.task.title , task_path(sr.task) %></td>
        
        <!--依頼者 -->
-       <td>sr.task.user.name</td>
+       <td><%= sr.task.user.name %></td>
        
        <!--担当者 -->      
        <% if sr.charger.name == current_user.id %>
@@ -57,12 +52,10 @@
        <td><%= link_to '却下',submit_request_unapprove_path(sr)%></td>
        
       </tr>
-     </div>
     <% end %>
 　　</tbody>
    </table>
-   </div>
  <%end %>
  
- <%= link_to '新規依頼',new_user_submit_request_path %>
- <%= link_to '依頼されている一覧',inbox_user_submit_requests_path %>
+ <%= link_to '新規依頼',new_user_submit_request_path, class: "btn btn-large btn-primary"%>
+ <%= link_to '依頼されている一覧',inbox_user_submit_requests_path , class: "btn btn-large btn-primary"%>

@@ -1,4 +1,3 @@
-<div id="notice"><%= notices %></div>
 
 <div>
     <strong>依頼者:</strong>
@@ -18,11 +17,11 @@
 <div>
     <strong>ステータス：</strong>
     <%= if @submit_request.status == 0 then "未依頼"
-    else @submit_request.status == 1 then "依頼中" 
-    else @submit_request.status == 1 then "承認済み" 
-    else @submit_request.status == 1 then "取り消し済み" 
-    else @submit_request.status == 1 then "却下済み" 
-    %>
+    elsif @submit_request.status == 1 then "依頼中" 
+    elsif @submit_request.status == 2 then "承認済み" 
+    elsif @submit_request.status == 8 then "取り消し済み" 
+    elsif @submit_request.status == 9 then "却下済み" 
+    end %>
 </div>
 
 <div><strong>メッセージ:</strong>

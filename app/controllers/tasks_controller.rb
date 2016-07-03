@@ -8,6 +8,9 @@ class TasksController < ApplicationController
   def index
    @tasks = Task.where(user_id: params[:user_id]).where.not(status: 1)
    @user = User.find(params[:user_id])
+   
+
+    
   end
 
   # GET /tasks/1
