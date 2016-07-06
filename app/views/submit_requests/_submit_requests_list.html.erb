@@ -47,7 +47,12 @@
        <% end %>
        
        <td><%= link_to '詳細',submit_request_path(sr)%></td>
+       <% if  sr.status == 2 or sr.status == 8 %>
+       <td>&emsp;&emsp;</td>
+       <% else %>
        <td><%= link_to '編集',edit_submit_request_path(sr)%></td>
+       <% end %>
+       
        <!--ステータス -->
        <% if  sr.status == 1 %>
        <td> <%= link_to "依頼の取り消し", submit_request_reject_path(sr) %></td>

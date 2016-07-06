@@ -33,7 +33,7 @@
        <% elsif  task.status == 1 %>
         <td>未承認</td>
        <% elsif task.status == 2 %>
-         <td>了承済</td>
+         <td>了承されました</td>
        <% elsif task.status == 8 %>
         <td>取り消し済</td>
        <% elsif task.status == 9 %>
@@ -42,9 +42,14 @@
         
         <% if task.charge.id == current_user.id %>
         <td><%= link_to '詳細', user_task_path(task.user, task) %></td>
+        
+        <% if task.status == 2 %>
+         <td colspan="2"></td>
+        <% else %>
         <td><%= link_to '編集', edit_user_task_path(task.user, task) %></td>
         <td><%= link_to '削除', user_task_path(task.user, task), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-
+        <% end %>
+        
         <% else %>
         <td colspan="3"></td>
         <% end %>
