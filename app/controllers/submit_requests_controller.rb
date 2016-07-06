@@ -1,6 +1,7 @@
 class SubmitRequestsController < ApplicationController
   before_action :set_submit_request, only: [:show, :edit, :update, :destroy ]
   before_action :set_submit_request02, only: [:approve, :unapprove, :reject]
+  before_action :authenticate_user!
   
   def index
     #自分が依頼したものが表示される
