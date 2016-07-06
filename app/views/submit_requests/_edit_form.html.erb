@@ -1,5 +1,6 @@
 <%= form_for([@user, @submit_request]) do |f| %>
- <div><%= f.collection_select :task_id, @tasks, :id, :title %></div>
+ <div> <%= @submit_request.task.title %>
+ </div>
  <div><%= f.collection_select :charge_id, @users, :id, :name %></div>
  <div><%= f.text_area  :message, placeholder: "依頼メッセージ", size: "50*100" %></div>
  <div><%= f.hidden_field :user_id%></div>

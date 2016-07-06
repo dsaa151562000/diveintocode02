@@ -1,6 +1,6 @@
 class SubmitRequestsController < ApplicationController
   before_action :set_submit_request, only: [:show, :edit, :update, :destroy ]
-  before_action :set_submit_request02, only: [:approve , :unapprove]
+  before_action :set_submit_request02, only: [:approve, :unapprove, :reject]
   
   def index
     #自分が依頼したものが表示される
@@ -11,6 +11,8 @@ class SubmitRequestsController < ApplicationController
     #つながっているユーザー
     friendsQuery = "select * FROM (SELECT users.* FROM users INNER JOIN relationships ON users.id = relationships.followed_id WHERE relationships.follower_id = " + current_user[:id].to_s + ") X INNER JOIN (SELECT users.* FROM users INNER JOIN relationships ON users.id = relationships.follower_id WHERE relationships.followed_id = " + current_user[:id].to_s + ") Y ON X.id = Y.id"
     @users = User.find_by_sql(friendsQuery)
+    
+    #binding.pry
 
     #自分が作成したタスク
     @tasks = Task.where.not(id: SubmitRequest.select(:task_id)).where(user_id: current_user.id, done: false)
@@ -23,11 +25,13 @@ class SubmitRequestsController < ApplicationController
 
   def create
     @submit_request = SubmitRequest.new(submit_request_params)
-    
+    #@task = Task.find(submit_request_params[:task_id])
+    #binding.pry
    respond_to do |format|
       if @submit_request.save
         #保存できたら、依頼対象のタスク担当者を依頼先のユーザーに更新する
-        @submit_request.task.update(status: 1)
+        @submit_request.task.update(status: 1, charge_id: submit_request_params[:charge_id])
+        
         format.html { redirect_to @submit_request, notice: '依頼しました' }
         format.json { render :show, status: :created, location: @submit_request }
       else
@@ -45,7 +49,13 @@ class SubmitRequestsController < ApplicationController
     friendsQuery = "select * FROM (SELECT users.* FROM users INNER JOIN relationships ON users.id = relationships.followed_id WHERE relationships.follower_id = " + current_user[:id].to_s + ") X INNER JOIN (SELECT users.* FROM users INNER JOIN relationships ON users.id = relationships.follower_id WHERE relationships.followed_id = " + current_user[:id].to_s + ") Y ON X.id = Y.id"
     @users = User.find_by_sql(friendsQuery)
     
-    #自分が作成したタスク
+    #@test = @submit_request
+    #binding.pry
+    
+    #taskのidがSubmitRequestのtask_idでなく、かつ自分が作成した(user_idがcurrent_user.id) 未完成(doneがfalse)のタスク
+    #@tasks = Task.where.not(id: SubmitRequest.select(:task_id)).where(user_id: current_user.id, done: false)
+    
+    #選択されたタスク
     @tasks = Task.where.not(id: SubmitRequest.select(:task_id)).where(user_id: current_user.id, done: false)
   end
 
@@ -78,10 +88,11 @@ class SubmitRequestsController < ApplicationController
     @Submit_Requests = SubmitRequest.where(charge_id: current_user.id).order("updated_at DESC")
     
     respond_to do |format|
+    format.html { redirect_to  inbox_user_submit_requests_path(current_user.id) , notice: '承認しました' }
+    format.js
+      
       #format.html
-      format.js
-      #format.html
-    end
+     end
     
   end
 
@@ -96,7 +107,7 @@ class SubmitRequestsController < ApplicationController
     @submit_requests = SubmitRequest.where(charge_id: current_user.id).order("updated_at DESC")
     
     respond_to do |format|
-     #format.html
+     format.html { redirect_to inbox_user_submit_requests_path(current_user.id) , notice: '却下しました' }
      format.js
      #format.html
     end
@@ -104,21 +115,24 @@ class SubmitRequestsController < ApplicationController
 
   def reject
     #承認取り消し
-    @submit_reques.update(status: 8)
-    #タスクは取り消している本人にもどす
-    @submit_reques.task.update(status: 8, charge_id: current_user.user_id)
+    @submit_request02.update(status: 8)
+    #依頼者自らが取り消す。　タスクは取り消している本人にもどす
+    @submit_request02.task.update(status: 8, charge_id: current_user.id)
     
     #自分が依頼しているもの一覧の表示
     @submit_requests = SubmitRequest.where(user_id: current_user.id).order("updated_at DESC")
     
     respond_to do |format|
+     format.html { redirect_to user_submit_requests_path(current_user.id) , notice: '取り消しました' }
      format.js
     end
   end
 
   def inbox
     #依頼されているもの = 担当者が自分である　一覧表示
-    @Submit_Requests = SubmitRequest.where(charge_id: current_user.id).order("updated_at DESC")
+    #@Submit_Requests = SubmitRequest.where(charge_id: current_user.id).order("updated_at DESC")
+    @Submit_Requests = SubmitRequest.where.not(status: 8).where(charge_id: current_user.id).order("updated_at DESC")
+    
   end
   
   private

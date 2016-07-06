@@ -1,6 +1,8 @@
 
 <% if submit_requests.present? %>
- <h4>自分が依頼したタスクは<%= submit_requests.count %>件です</h4>
+
+
+ <h4>依頼されているタスクは<%= submit_requests.count %>件</h4>
 
   <table class="table table-bordered">
     <th>ステータス</th>
@@ -14,23 +16,23 @@
       <tr>
        <!--ステータス -->
        <% if sr.status == 1 %>
-        <td>未承認</td>
+        <td>未承認です。</td>
        <% elsif sr.status == 2 %>
-         <td>了承されました。</td>
+         <td>承認しました。</td>
        <% elsif sr.status == 8 %>
-        <td>依頼を取り消しました。</td>
+        <td>取り消し済</td>
        <% elsif sr.status == 9 %>
-         <td>却下されました。</td> 
+         <td>却下しました。</td> 
        <% end %>
        
        <!--タスク・タイトル -->
        <td><%= link_to sr.task.title , task_path(sr.task) %></td>
        
-       <!--タスク登録者 -->
+       <!--依頼者 -->
        <td><%= sr.user.name %></td>
        
        <!--担当者 -->      
-       <% if sr.charger.id == current_user.id %>
+       <% if sr.charger.name == current_user.name %>
        <td>自分</td>
        <% else %>
        <td><%= sr.charger.name %></td>
@@ -48,12 +50,21 @@
        
        <td><%= link_to '詳細',submit_request_path(sr)%></td>
        <td><%= link_to '編集',edit_submit_request_path(sr)%></td>
-       <!--ステータス -->
-       <% if  sr.status == 1 %>
-       <td> <%= link_to "依頼の取り消し", submit_request_reject_path(sr) %></td>
-       <% else %>
-       <td>&emsp;&emsp;</td>
+      
+             <!--ステータス -->
+       <% if sr.status == 1 %>
+        <!--未承認 -->
+       <td><%= link_to  "承認する",submit_request_approve_path(sr) %> </td>
+       <td><%= link_to "却下する", submit_request_unapprove_path(sr) %> </td>
+       <% elsif sr.status == 2 %>
+       <!--了承済 -->
+         <td colspan="2"><%= link_to "却下する", submit_request_unapprove_path(sr) %> </td>
+       <% elsif sr.status == 9 %>
+         <!--却下 -->
+         <td colspan="2"><%= link_to  "承認する",submit_request_approve_path(sr) %> </td>
        <% end %>
+
+
       </tr>
     <% end %>
 　　</tbody>
@@ -61,4 +72,4 @@
  <%end %>
  
  <%= link_to '新規依頼',new_user_submit_request_path, class: "btn btn-large btn-primary"%>
- <%= link_to '依頼されている一覧',inbox_user_submit_requests_path , class: "btn btn-large btn-primary"%>
+<%= link_to '自分が依頼した一覧', user_submit_requests_path , class: "btn btn-large btn-primary"%>

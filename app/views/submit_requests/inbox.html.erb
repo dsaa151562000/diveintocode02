@@ -1,7 +1,4 @@
 <div id="inbox_list_<%= current_user.id %>" >
-<%= render partial: 'submit_requests_list', locals: { submit_requests: @Submit_Requests} %>
+<%= render partial: 'submit_requests_list_inbox', locals: { submit_requests: @Submit_Requests} %>
 </div>
 
-<br>
-
-<%= link_to '依頼一覧', user_submit_requests_path%>

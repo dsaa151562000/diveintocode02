@@ -1,32 +1,28 @@
+<div class="panel panel-default">
+    
 
-<div>
-    <strong>依頼者:</strong>
-    <%= @submit_request.user.name if @submit_request.user.present? %>
-</div>
+    <div class="panel-heading">依頼者:</div>
+    <div class="panel-body"><%= @submit_request.user.name if @submit_request.user.present? %></div>
 
-<div>
-    <strong>タスク：</strong>
-    <%= @submit_request.task.title %>
-</div>
+<div class="panel-heading">タスク名：</div>
+<div class="panel-body"> <%= @submit_request.task.title %></div>
 
-<div>
-    <strong>担当者：</strong>
-    <%= @submit_request.charger.name if @submit_request.user.present? %>
-</div>
 
-<div>
-    <strong>ステータス：</strong>
+<div class="panel-heading">担当者：</div>
+<div class="panel-body"> <%= @submit_request.charger.name if @submit_request.user.present? %></div>
+
+<div class="panel-heading">ステータス：</div>
+<div class="panel-body">
     <%= if @submit_request.status == 0 then "未依頼"
     elsif @submit_request.status == 1 then "依頼中" 
     elsif @submit_request.status == 2 then "承認済み" 
     elsif @submit_request.status == 8 then "取り消し済み" 
     elsif @submit_request.status == 9 then "却下済み" 
-    end %>
-</div>
+    end %></div>
 
-<div><strong>メッセージ:</strong>
-    <%= @submit_request.message %>
-</div>
 
+<div class="panel-heading">メッセージ:</div>
+<div class="panel-body"><%= @submit_request.message %></div>
+</div>
 <%= link_to '編集' , edit_submit_request_path(@submit_request) %>
 <%= link_to '戻る' , user_submit_requests_path(@submit_request) %>

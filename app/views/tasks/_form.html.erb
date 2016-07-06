@@ -1,7 +1,7 @@
 <%= form_for([@task.user, @task]) do |f| %>
   <% if @task.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
+      <h2><%= @task.errors.count%>個のエラー！</h2>
 
       <ul>
       <% @task.errors.full_messages.each do |message| %>
@@ -17,15 +17,15 @@
   </div>
 
   <div class="field">
-    <%= f.label :title %><br>
+    <%= f.label :タスク名 %><br>
     <%= f.text_field :title %>
   </div>
   <div class="field">
-    <%= f.label :content %><br>
+    <%= f.label :タスク内容 %><br>
     <%= f.text_area :content %>
   </div>
   <div class="field">
-    <%= f.label :deadline %><br>
+    <%= f.label :期日 %><br>
     <%= f.datetime_select :deadline %>
   </div>
 
@@ -34,7 +34,7 @@
     <%= f.check_box :done %>
   </div>
   <div class="field">
-    <%= f.label :status %><br>
+    <%= f.label :ステータス %><br>
     <%= f.select :status, [["未着手", "0"], ["対応中", "1"]] %>
   </div>
   <div class="actions">

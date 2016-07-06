@@ -1,0 +1,1 @@
+$("#inbox_list_<%= current_user.id %>").html("<%= escape_javascript(render partial: 'submit_requests_list', locals: {submit_requests: @submit_requests} ) %>");

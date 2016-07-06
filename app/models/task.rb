@@ -3,7 +3,10 @@ class Task < ActiveRecord::Base
   has_many :goodjobs, dependent: :destroy
   belongs_to :user
   belongs_to :charge, class_name: 'User', foreign_key: 'charge_id'
-  validates :title, presence: true
+  has_many :submit_requests, dependent: :destroy
+  validates :title, presence: { message: "タスク名を入力してください" }
+  validates  :content, presence: { message: "内容を入力してください" }
+  validates :deadline, timeliness: { on_or_after: :now }
   
    #フォローしあっているユーザIDを取得する
    def self.from_users_followed_by(user)
