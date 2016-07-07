@@ -26,7 +26,11 @@
   </div>
   <div class="field">
     <%= f.label :期日 %><br>
-    <%= f.datetime_select :deadline %>
+    <%= f.date_select(
+         :deadline,
+          start_year: Time.now.year,
+          end_year:   Time.now.year + 18,
+          default:   Time.now) %>
   </div>
 
   <div class="field">

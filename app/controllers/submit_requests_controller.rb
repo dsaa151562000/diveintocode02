@@ -84,7 +84,10 @@ class SubmitRequestsController < ApplicationController
     #承認進み
     @submit_request02.update(status: 2)
     #依頼にひもずくタスクのステータスを承認にする
-    @submit_request02.task.update(status: 2)
+    #依頼管理にひもずくタスクの担当者も更新される
+    @submit_request02.task.update(status: 2, charge_id: current_user.id)
+
+    #binding.pry
     #現在依頼した本人が担当者になっている一覧を表示
     @Submit_Requests = SubmitRequest.where(charge_id: current_user.id).order("updated_at DESC")
     
@@ -119,7 +122,7 @@ class SubmitRequestsController < ApplicationController
     @submit_request02.update(status: 8)
     #依頼者自らが取り消す。　タスクは取り消している本人にもどす
     @submit_request02.task.update(status: 8, charge_id: current_user.id)
-    
+    @submit_request02.destroy
     #自分が依頼しているもの一覧の表示
     @submit_requests = SubmitRequest.where(user_id: current_user.id).order("updated_at DESC")
     
