@@ -70,4 +70,12 @@ resources :qacomments
   resources :blogs do
     resources :comments
   end
+  
+  resources :conversations do
+   resources :messages
+  end
+  
+  
+  
+  
 end
