@@ -6,13 +6,12 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-   @tasks = Task.where(user_id: params[:user_id]).where.not(status: 1)
+   #@tasks = Task.where(user_id: params[:user_id]).where.not(status: 1)
+   @tasks = Task.where(user_id: params[:user_id]
    #@tasks = Task.where("user_id = ? OR charge_id = ?", params[:user_id], params[:user_id])
    
    @user = User.find(params[:user_id])
    
-
-    
   end
 
   # GET /tasks/1
