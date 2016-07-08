@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160629063451) do
+ActiveRecord::Schema.define(version: 20160708072817) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,13 @@ ActiveRecord::Schema.define(version: 20160629063451) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "conversations", force: :cascade do |t|
+    t.integer  "sender_id"
+    t.integer  "recipient_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "customers", force: :cascade do |t|
     t.string   "customer_name"
     t.datetime "created_at",    null: false
@@ -66,6 +73,18 @@ ActiveRecord::Schema.define(version: 20160629063451) do
 
   add_index "memberships", ["project_id"], name: "index_memberships_on_project_id", using: :btree
   add_index "memberships", ["user_id"], name: "index_memberships_on_user_id", using: :btree
+
+  create_table "messages", force: :cascade do |t|
+    t.text     "body"
+    t.integer  "conversation_id"
+    t.integer  "user_id"
+    t.boolean  "read",            default: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
+
+  add_index "messages", ["conversation_id"], name: "index_messages_on_conversation_id", using: :btree
+  add_index "messages", ["user_id"], name: "index_messages_on_user_id", using: :btree
 
   create_table "projects", force: :cascade do |t|
     t.integer  "user_id"
@@ -197,6 +216,8 @@ ActiveRecord::Schema.define(version: 20160629063451) do
   add_foreign_key "comments", "users"
   add_foreign_key "memberships", "projects"
   add_foreign_key "memberships", "users"
+  add_foreign_key "messages", "conversations"
+  add_foreign_key "messages", "users"
   add_foreign_key "projects", "users"
   add_foreign_key "projecttasks", "projects"
   add_foreign_key "projecttasks", "users"
