@@ -1,7 +1,12 @@
 <div class="boxb">
-<% unless current_user?(user) %>
-<li><%= user.id  %><%=link_to user.name , user %></li>
+
+<% if user.id != current_user.id %>
+
+<%= link_to user.name, user %>
+<%= link_to 'メッセージ', conversations_path(sender_id: current_user.id, recipient_id: user.id), method: 'post'%>
+
+<%= render partial: 'follow_form', locals: { user: user } if signed_in? %>
+
 <% end %>
 
-<%= render partial:'follow_form',locals:{user: user}if signed_in? %>
 </div>
