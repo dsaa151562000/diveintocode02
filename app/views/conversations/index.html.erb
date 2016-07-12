@@ -10,7 +10,6 @@
     <% if conversation.target_user(current_user).present? %>
     <td>
     <%= link_to conversation.target_user(current_user).name,  conversation_messages_path(conversation)%>
-    <%= conversation.msg_new(conversation.id,conversation.sender_id).body%>
     </td>
     <% end %> 
 
