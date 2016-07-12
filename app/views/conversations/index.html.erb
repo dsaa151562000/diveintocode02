@@ -6,12 +6,14 @@
 </thead>
     <% @conversations.each do |conversation| %>
     <tbody>
-    <td>
     <!--、中身が空か、または入れものそのものが存在しないときの--->
     <% if conversation.target_user(current_user).present? %>
+    <td>
     <%= link_to conversation.target_user(current_user).name,  conversation_messages_path(conversation)%>
-    <% end %> 
+    <%= conversation.msg_new(conversation.id,conversation.sender_id).body%>
     </td>
+    <% end %> 
+
     </tbody>
     <% end %>
 </table>

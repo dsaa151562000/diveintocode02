@@ -50,6 +50,12 @@ class MessagesController < ApplicationController
     @message = @conversation.messages.new(message_params)
     #保存ができれば
     if @message.save
+      
+      #Pusherに「notifications〜」というチャンネルで接続する、という意味です。
+      #メッセージを送付した「受け手」のIDを指定して通知させます。
+      #トリガーを「message」という名前にします。そのトリガーに変数として「messaging」を受け渡し、その中身としてメッセージの内容（本文）を入れます。
+      Pusher['notifications'+@message.conversation.recipient_id.to_s].trigger('message', {messaging: "メッセージが届いています。：#{@message.body}"})
+      
       #会話にひもづくメッセージ一覧の画面に遷移する
       redirect_to conversation_messages_path(@conversation)
     end

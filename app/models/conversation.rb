@@ -25,6 +25,9 @@ class Conversation < ActiveRecord::Base
             User.find(sender_id)
         end
     end
-
+    
+    def msg_new(c_id,u_id)
+         Message.message_new(c_id,u_id) 
+    end
     
 end

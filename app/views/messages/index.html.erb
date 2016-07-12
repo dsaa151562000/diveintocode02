@@ -6,8 +6,18 @@
   <% @messages.each do |message| %>
    <% if message.body != nil %>
     <%  user = User.find(message.user_id) %>
-  	 <div> <%= user.name%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= message.body%>
-  	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+  	 <div class= "item" > 
+	    <div class= "content" >
+	   	<div class= "header" >
+			  <strong><%= user.name%></strong>	:<%= message.message_time%>
+		   </div>
+	   	<div class ="list">
+		   	<div class="item">
+		   	<i class="right triangle icon"></i><%= message.body%>
+			  </div>
+	  	</div>
+  	</div>
+ </div>
   	 
    <% end %>
   <% end %>

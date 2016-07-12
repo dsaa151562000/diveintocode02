@@ -57,6 +57,8 @@ gem 'kaminari'
 
 gem 'jc-validates_timeliness'
 
+gem 'pusher'
+
 
 gem "dotenv-rails", groups: [:development, :test]
 
