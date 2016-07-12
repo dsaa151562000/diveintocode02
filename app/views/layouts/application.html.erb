@@ -3,14 +3,11 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= content_for?(:title) ? yield(:title) : "Achieve" %></title>
-
+     <script src="https://js.pusher.com/3.0/pusher.min.js"></script>
      <%= stylesheet_link_tag  'application', media: 'all', 'data-turbolinks-track' => true %>
      <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-     
-    <script src="https://js.pusher.com/3.0/pusher.min.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <%= csrf_meta_tags %>
   </head>
@@ -38,12 +35,12 @@
           <% if user_signed_in? %> 
           
           <script>
-          var pusher = new Pusher('<%= Pusher.key %>');
-          var channel = pusher.subscribe('notifications'+<%= current_user.id.to_s%>);
-          channel.bind('message', function(data) {
-          alert(data.messaging);
-          });
-          </script>  
+            var pusher = new Pusher('<%= Pusher.key %>');
+            var channel = pusher.subscribe('notifications'+<%= current_user.id.to_s%>);
+            channel.bind('message', function(data) {
+            alert(data.messaging);
+            });
+          </script>
           
           <li><%=link_to "マイプロジェクト",projects_path %></li>
           <li><%=link_to "マイタスク",user_tasks_path(current_user.id) %></li>
@@ -51,7 +48,7 @@
           <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li> 
           <li><%= link_to "編集", edit_user_registration_path %></li> 
           
-        <li class="dropdown">
+          <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><%=link_to "ブログ",blogs_path %></li>
@@ -65,14 +62,13 @@
             <li><%=link_to "ユーザー一覧",users_index_path %></li>
 
 
-          </ul>
-        </li>
-<% else %>
-<li><%= link_to "ログイン", new_user_session_path %></li> 
-<% end %>
-          
+              </ul>
+            </li>
+        <% else %>
+          <li><%= link_to "ログイン", new_user_session_path %></li> 
+        <% end %>
           </a></li>
-      </ul>
+        </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
