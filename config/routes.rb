@@ -75,7 +75,6 @@ resources :qacomments
    resources :messages
   end
   
-  
-  
-  
+  resources :notifications, only: [:index]
+
 end
