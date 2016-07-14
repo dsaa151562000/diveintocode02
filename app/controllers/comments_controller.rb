@@ -30,7 +30,8 @@ class CommentsController < ApplicationController
     @comment = current_user.comments.build(comment_params)
     @blog = @comment.blog
     #@notification = @comment.notifications.build(recipient_id: @blog.user_id, sender_id: current_user.id)
-     @notification = @comment.notifications.build(recipient_id: @blog.user_id, sender_id: current_user.id, read: false)
+    #コメントにひもずく受け取り先:recipient_id>>@blog.user_id　 送り手sender_id>>current_user.id
+    @notification = @comment.notifications.build(recipient_id: @blog.user_id, sender_id: current_user.id, read: false)
     
     respond_to do |format|
       if @comment.save
