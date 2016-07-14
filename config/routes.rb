@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
  
-  get 'notifications/index'
+  #get 'notifications/index'
 
  resources :projecttasks
   
@@ -38,6 +38,7 @@ resources :qacomments
   
   resources :users, only:[:index, :show, :update] do
    resources :tasks
+   resources :notifications, only: [:index]
    member do
     get :following, :followers;    
    end
@@ -77,6 +78,7 @@ resources :qacomments
    resources :messages
   end
   
-  resources :notifications, only: [:index]
+
+  
 
 end

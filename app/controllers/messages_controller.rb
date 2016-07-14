@@ -54,6 +54,8 @@ class MessagesController < ApplicationController
       #Pusherに「notifications〜」というチャンネルで接続する、という意味です。
       #メッセージを送付した「受け手」のIDを指定して通知させます。
       #トリガーを「message」という名前にします。そのトリガーに変数として「messaging」を受け渡し、その中身としてメッセージの内容（本文）を入れます。
+      
+      #最初に会話が発生した際に、受取人（recipient)になった方に、常に、プッシュ通知が届.....
       #Pusher['notifications'+@message.conversation.recipient_id.to_s].trigger('message', {messaging: "メッセージが届いています。：#{@message.body}"})
       
       if @message.user_id == @conversation.sender_id

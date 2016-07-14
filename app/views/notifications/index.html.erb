@@ -1,2 +1,21 @@
-<h1>Notifications#index</h1>
-<p>Find me in app/views/notifications/index.html.erb</p>
+<div class="container">
+  <h2>お知らせ</h2>
+  <hr>
+  <% @notifications.each do |notification| %>
+    <ul class="notification-list">
+      <li>
+        <span class="label label-pill label-default"><%= display_read_status(notification.read) %></span>
+        <div>
+          <%= receive_user(notification) %>さんが
+          <small class="dropdown">ブログ「<%= notification.comment.blog.title %>」のコメントしました。</small>
+        </div>
+        <div class="palette-paragraph text-right">
+          <small class="dropdown">
+            <i class="fa fa-clock-o"></i>&ensp;<%= posted_time(notification.created_at) %>
+          </small>
+        </div>
+      </li>
+      <hr>
+    </ul>
+  <% end %>
+</div>
