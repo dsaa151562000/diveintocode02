@@ -8,12 +8,12 @@
         <div>
           <%= receive_user(notification) %>さんからのメッセージ
          <small class="dropdown">>>
-       <%=notification.submit_request_id %></small>
+      <% @msg=notification.submit_request_msg(notification.submit_request_id) %>「<%=@msg.message %>」</small>
         </div>
         <div class="palette-paragraph text-right">
           <small class="dropdown">
             <i class="fa fa-clock-o"></i>&ensp;<%= posted_time(notification.created_at) %>
-             <% @msg=notification.submit_request_msg(notification.submit_request_id) %>「<%=@msg.message %>」
+             
           </small>
         </div>
       </li>
