@@ -8,9 +8,7 @@
         <div>
           <%= receive_user(notification) %>さんからのメッセージ
          <small class="dropdown">>>
-         <% @msg=notification.submit_request_msg(notification.submit_request_id) 
-         #binding.pry
-         %>「<%=@msg.message %>」</small
+       <%=notification.submit_request_id %></small>
         </div>
         <div class="palette-paragraph text-right">
           <small class="dropdown">
