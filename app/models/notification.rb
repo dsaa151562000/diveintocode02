@@ -18,8 +18,8 @@ class Notification < ActiveRecord::Base
         })
     end
     
-    def submit_request_msg(s_id)
-         SubmitRequest.select_submit_request(s_id)
+    def submit_request_msg(id)
+         SubmitRequest.select_submit_request(id)
     end
     
 end
