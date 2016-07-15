@@ -13,7 +13,7 @@
         <div class="palette-paragraph text-right">
           <small class="dropdown">
             <i class="fa fa-clock-o"></i>&ensp;<%= posted_time(notification.created_at) %>
-             <%= notification.submit_request_id%>
+             <% @msg=notification.submit_request_msg(notification.submit_request_id) %>「<%=@msg.message %>」
           </small>
         </div>
       </li>

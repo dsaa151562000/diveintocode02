@@ -10,6 +10,6 @@ class SubmitRequest < ActiveRecord::Base
   accepts_nested_attributes_for :notifications
   
   #scope :select_submit_request, -> {find(params[:id]) }
-  scope :select_submit_request, ->(id) {find(id)}
+  scope :select_submit_request, ->(s_id) { find(s_id) }
 
 end
