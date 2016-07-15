@@ -28,6 +28,7 @@ class CommentsController < ApplicationController
   def create
     #@comment = Comment.new(comment_params)
     @comment = current_user.comments.build(comment_params)
+   # binding.pry
     @blog = @comment.blog
     #@notification = @comment.notifications.build(recipient_id: @blog.user_id, sender_id: current_user.id)
     #コメントにひもずく受け取り先:recipient_id>>@blog.user_id　 送り手sender_id>>current_user.id

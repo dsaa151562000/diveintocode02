@@ -47,6 +47,7 @@
           <li><%=link_to "マイプロジェクト",projects_path %></li>
           <li><%=link_to "マイタスク",user_tasks_path(current_user.id) %></li>
           <li><%=link_to "タスク依頼管理",user_submit_requests_path(current_user.id) %></li>
+          <li class="dropdown notifications-dropdown"><%= render 'layouts/dropdown/notifications' %></li>
           <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li> 
           <li><%= link_to "編集", edit_user_registration_path %></li> 
           
@@ -64,7 +65,7 @@
             <li><%=link_to "ユーザー一覧",users_index_path %></li>
           </ul>
             </li>
-            <li class="dropdown notifications-dropdown"><%= render 'layouts/dropdown/notifications' %></li>
+           
             
         <% else %>
           <li><%= link_to "ログイン", new_user_session_path %></li> 

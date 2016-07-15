@@ -9,7 +9,8 @@ class ApplicationController < ActionController::Base
     
     if(signed_in?)
     #binding.pry
-     @notifications = Notification.where(recipient_id: current_user.id).order(created_at: :desc).includes({comment: [:blog]})
+     #@notifications = Notification.where(recipient_id: current_user.id).order(created_at: :desc).includes({comment: [:blog]})
+     @notifications = Notification.where(recipient_id: current_user.id).order(created_at: :desc)
      #binding.pry
     end
     

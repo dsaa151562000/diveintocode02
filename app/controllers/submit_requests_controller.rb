@@ -2,6 +2,7 @@ class SubmitRequestsController < ApplicationController
   before_action :set_submit_request, only: [:show, :edit, :update, :destroy ]
   before_action :set_submit_request02, only: [:approve, :unapprove, :reject]
   before_action :authenticate_user!
+  after_action :sending_pusher02, only: [:create]
   
   def index
     #自分が依頼したものが表示される
@@ -25,9 +26,12 @@ class SubmitRequestsController < ApplicationController
   end
 
   def create
-    @submit_request = SubmitRequest.new(submit_request_params)
+    #@comment = current_user.comments.build(comment_params)
+    #@submit_request = SubmitRequest.new(submit_request_params)
+     @submit_request = current_user.submit_requests.build(submit_request_params)
     #@task = Task.find(submit_request_params[:task_id])
     #binding.pry
+   @notification = @submit_request.notifications.build(recipient_id: @submit_request.charge_id, sender_id: current_user.id, read: false)
    respond_to do |format|
       if @submit_request.save
         #保存できたら、依頼対象のタスク担当者を依頼先のユーザーに更新する
@@ -150,8 +154,11 @@ class SubmitRequestsController < ApplicationController
   end
   
    def set_submit_request02
-    @submit_request02 = SubmitRequest.find(params[:submit_request_id])
+    @submit_request02 = SubmitRequest.find(params[:submit_requests_id])
    end
   
+    def sending_pusher02
+      Notification.sending_pusher(@notification.recipient_id)
+    end
   
 end

@@ -6,11 +6,8 @@
       <li>
         <span class="label label-pill label-default"><%= display_read_status(notification.read) %></span>
         <div>
-          <%= receive_user(notification) %>さんからのメッセージ
-         <small class="dropdown">>>
-         <% @msg=notification.submit_request_msg(notification.submit_request_id) 
-         #binding.pry
-         %>「<%=@msg.message %>」</small
+          <%= receive_user(notification) %>さんが
+          <small class="dropdown">ブログ「<%= notification.comment.blog.title %>」のコメントしました。</small>
         </div>
         <div class="palette-paragraph text-right">
           <small class="dropdown">
