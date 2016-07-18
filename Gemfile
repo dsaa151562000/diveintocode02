@@ -58,7 +58,8 @@ gem 'kaminari'
 gem 'jc-validates_timeliness'
 
 gem 'pusher'
-
+# See https://github.com/rails/execjs#readme for more supported runtimes
+gem 'therubyracer', platforms: :ruby
 gem 'unicorn'
 
 
