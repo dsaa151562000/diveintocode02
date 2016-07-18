@@ -1,42 +1,56 @@
-namespace :unicorn do
-  desc "Start unicorn for development env."
+# Railsのルートパスを求める。(RAILS_ROOT/config/unicorn.rbに配置している場合。)
+rails_root = File.expand_path('../../', __FILE__)
+# RAILS_ENVを求める。（RAILS_ENV毎に挙動を変更したい場合に使用。今回は使用しません。)
+# rails_env = ENV['RAILS_ENV'] || "development"
 
-  task(:start_develop) {
-    # config = Rails.root.join('config', 'unicorn.rb')
-    sh "bundle exec unicorn_rails -c config/unicorn.rb -D -E development"
-  }
+# Capistranoでunicornを使ったアプリをデプロイしているとBundler::GemfileNotFoundという例外があがることがあるため設定
+ENV['BUNDLE_GEMFILE'] = rails_root + "/Gemfile"
 
-  task(:start_production) {
-    # config = Rails.root.join('config', 'unicorn.rb')
-    sh "bundle exec unicorn_rails -c config/unicorn.rb -D -E production"
-  }
+# Unicornは複数のワーカーで起動するのでワーカー数を定義
+# サーバーのメモリなどによって変更すること。
+worker_processes 2
 
-  desc "Stop unicorn"
-  task(:stop) { unicorn_signal :QUIT }
+# 指定しなくても良い。
+# Unicornの起動コマンドを実行するディレクトリを指定します。
+# （記載しておけば他のディレクトリでこのファイルを叩けなくなる。）
+working_directory rails_root
 
-  desc "Restart unicorn with USR2"
-  task(:restart) { unicorn_signal :USR2 }
+# 接続タイムアウト時間
+timeout 30
 
-  desc "Increment number of worker processes"
-  task(:increment) { unicorn_signal :TTIN }
+# Unicornのエラーログと通常ログの位置を指定。
+stderr_path File.expand_path('../../log/unicorn_stderr.log', __FILE__)
+stdout_path File.expand_path('../../log/unicorn_stdout.log', __FILE__)
 
-  desc "Decrement number of worker processes"
-  task(:decrement) { unicorn_signal :TTOU }
+# Nginxで使用する場合は以下の設定を行う。
+# listen File.expand_path('../../tmp/sockets/unicorn.sock', __FILE__)
+# とりあえず起動して動作確認をしたい場合は以下の設定を行う。
+listen 3000
 
-  desc "Unicorn pstree (depends on pstree command)"
-  task(:pstree) do
-    sh "pstree '#{unicorn_pid}'"
-  end
+# プロセスの停止などに必要なPIDファイルの保存先を指定。
+pid File.expand_path('../../tmp/pids/unicorn.pid', __FILE__)
 
-  def unicorn_signal signal
-    Process.kill signal, unicorn_pid
-  end
+# 基本的には`true`を指定する。Unicornの再起動時にダウンタイムなしで再起動が行われる。
+preload_app true
+# 効果なしとの記事を見たので、コメントアウト。
+# GC.respond_to?(:copy_on_write_friendly=) and GC.copy_on_write_friendly = true
 
-  def unicorn_pid
+# USR2シグナルを受けると古いプロセスを止める。
+# 後述するが、記述しておくとNginxと連携する時に良いことがある。
+before_fork do |server, worker|
+  defined?(ActiveRecord::Base) and
+      ActiveRecord::Base.connection.disconnect!
+
+  old_pid = "#{server.config[:pid]}.oldbin"
+  if old_pid != server.pid
     begin
-      File.read("./tmp/pids/unicorn.pid").to_i
-    rescue Errno::ENOENT
-      raise "Unicorn doesn't seem to be running"
+      sig = (worker.nr + 1) >= server.worker_processes ? :QUIT : :TTOU
+      Process.kill(sig, File.read(old_pid).to_i)
+    rescue Errno::ENOENT, Errno::ESRCH
     end
   end
+end
+
+after_fork do |server, worker|
+  defined?(ActiveRecord::Base) and ActiveRecord::Base.establish_connection
 end
