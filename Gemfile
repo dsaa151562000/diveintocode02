@@ -59,6 +59,8 @@ gem 'jc-validates_timeliness'
 
 gem 'pusher'
 
+gem 'unicorn'
+
 
 gem "dotenv-rails", groups: [:development, :test]
 
