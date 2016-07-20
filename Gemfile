@@ -62,7 +62,9 @@ gem 'pusher'
 #gem 'therubyracer', platforms: :ruby
 #gem 'unicorn'
 
-gem "dotenv-rails"
+gem 'dotenv-rails'
+
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -80,7 +82,6 @@ end
 
 group :development, :test do
 
-  gem 'dotenv-rails'
   
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
@@ -90,6 +91,12 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  
+  gem 'capistrano', '3.4.0'
+  gem 'capistrano-rails'
+  gem 'capistrano-rbenv'
+  gem 'capistrano-bundler'
+  gem 'capistrano3-unicorn'
 end
 
 
