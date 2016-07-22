@@ -21,6 +21,8 @@ class User < ActiveRecord::Base
   has_many :projects, dependent: :destroy
   has_many :projecttasks, dependent: :destroy
   has_many :submit_requests, dependent: :destroy
+  has_many :memberships, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil) 
