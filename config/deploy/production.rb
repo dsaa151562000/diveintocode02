@@ -46,7 +46,7 @@
 #    forward_agent: false,
 #    auth_methods: %w(password)
 #  }
-
+set :ssh_options, keys: "~/.ssh/#{ENV['KEY_NAME']}"
 #
 # The server-based syntax can be used to override options:
 # ------------------------------------
