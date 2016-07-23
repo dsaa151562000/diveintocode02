@@ -60,6 +60,12 @@ class User < ActiveRecord::Base
   user
   end
   
+  def self.from_omniauth(auth)
+   uid = auth[:uid]
+   provider = auth[:provider]
+
+   User.where(provider: provider, uid: uid).first
+  end
   
   def self.create_unique_string 
     SecureRandom.uuid 
