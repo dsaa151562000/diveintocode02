@@ -29,7 +29,13 @@ class ApplicationController < ActionController::Base
           user_params.permit(:name, :email, :password, :password_confirmation, :image)
       end
       #devise_parameter_sanitizer.for(:account_update) << :name
-      devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:name, :email, :password, :password_confirmation, :current_password, :image) }
+      #devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:name, :email, :password, :password_confirmation, :current_password, :image) }
+      
+      devise_parameter_sanitizer.permit(:account_update) do |user_params|
+          user_params.permit(:name, :email, :password, :password_confirmation, :current_password, :image)
+      end
+      
+      
     end
     
 end
