@@ -182,15 +182,15 @@ ActiveRecord::Schema.define(version: 20160714153156) do
   end
 
   create_table "tasks", force: :cascade do |t|
-    t.integer  "user_id"
+    t.integer  "user_id",                    null: false
     t.string   "title"
     t.text     "content"
     t.datetime "deadline"
-    t.integer  "charge_id"
-    t.boolean  "done"
-    t.integer  "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "charge_id",                  null: false
+    t.boolean  "done",       default: false
+    t.integer  "status",     default: 0
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   add_index "tasks", ["user_id"], name: "index_tasks_on_user_id", using: :btree
