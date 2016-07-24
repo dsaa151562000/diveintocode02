@@ -103,13 +103,24 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: '52.197.181.67' }
   
-  config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-      address:              'smtp.gmail.com',
-      port:                 587,
-      user_name: ENV["GMAIL_ADDRESS"],
-      password: ENV["GMAIL_PASSWORD"],
-      authentication:       'plain',
-     }
+  # config.action_mailer.raise_delivery_errors = true
+  # config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.smtp_settings = {
+  #     address:              'smtp.gmail.com',
+  #     port:                 587,
+  #     user_name: ENV["GMAIL_ADDRESS"],
+  #     password: ENV["GMAIL_PASSWORD"],
+  #     authentication:       'plain',
+  #   }
+  
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+      :address        => 'smtp.flower-chell.com',
+      :port           => '587',
+      :authentication => :plain,
+      :user_name      => ENV['SENDGRID_USERNAME02'],
+      :password       => ENV['SENDGRID_PASSWORD02'],
+      :domain         => 'heroku.com',
+      :enable_starttls_auto => true
+    }
 end
